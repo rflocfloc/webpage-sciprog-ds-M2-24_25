@@ -1,0 +1,588 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Module 2, Practical 2\n",
+    "\n",
+    "In this practical we will learn how to test a Python program and how to measure its runtime and memory usage (i.e., compexity in time and space).\n",
+    "\n",
+    "## Testing\n",
+    "\n",
+    "Testing a software product allows to check whether the written code actually yields the expected results. In particular, testing the execution of code is called *dynamic* testing.\n",
+    "\n",
+    "In Python, we can use *assert* to quickly test that functions we have written behave as they should:  \n",
+    "\n",
+    "```\n",
+    "assert(condition)\n",
+    "```\n",
+    "\n",
+    "```condition``` must be ```True``` for program execution to continue without errors.  \n",
+    "If it is ```False```, an ```AssertionError``` exception will be raised."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[1;32m/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 2\u001b[0m line \u001b[0;36m1\n\u001b[1;32m      <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=7'>8</a>\u001b[0m \u001b[39massert\u001b[39;00m(sumOfTwo(\u001b[39m3\u001b[39m,\u001b[39m5\u001b[39m) \u001b[39m==\u001b[39m \u001b[39m8\u001b[39m)\n\u001b[1;32m     <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=9'>10</a>\u001b[0m \u001b[39m# what happens here?\u001b[39;00m\n\u001b[0;32m---> <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=10'>11</a>\u001b[0m \u001b[39massert\u001b[39;00m(sumOfTwo(\u001b[39m3\u001b[39m,\u001b[39m5\u001b[39m) \u001b[39m==\u001b[39m \u001b[39m1\u001b[39m)\n",
+      "\u001b[0;31mAssertionError\u001b[0m: "
+     ]
+    }
+   ],
+   "source": [
+    "def sumOfTwo(x, y):\n",
+    "    return x + y\n",
+    "\n",
+    "# this should return 8\n",
+    "sumOfTwo(3,5)\n",
+    "\n",
+    "# check that the function is working properly\n",
+    "assert(sumOfTwo(3,5) == 8)\n",
+    "\n",
+    "# what happens here?\n",
+    "assert(sumOfTwo(3,5) == 1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Always remember that these tests are not exhaustive, they check only specific aspects of the function and a subset of possible inputs.  \n",
+    "For example, *what happens if the user provides one integer and one string as parameters?*\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "TypeError",
+     "evalue": "unsupported operand type(s) for +: 'int' and 'str'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "\u001b[1;32m/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 4\u001b[0m line \u001b[0;36m1\n\u001b[0;32m----> <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=0'>1</a>\u001b[0m sumOfTwo(\u001b[39m3\u001b[39;49m, \u001b[39m\"\u001b[39;49m\u001b[39mbaduser\u001b[39;49m\u001b[39m\"\u001b[39;49m)\n",
+      "\u001b[1;32m/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 4\u001b[0m line \u001b[0;36m2\n\u001b[1;32m      <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=0'>1</a>\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39msumOfTwo\u001b[39m(x, y):\n\u001b[0;32m----> <a href='vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=1'>2</a>\u001b[0m     \u001b[39mreturn\u001b[39;00m x \u001b[39m+\u001b[39;49m y\n",
+      "\u001b[0;31mTypeError\u001b[0m: unsupported operand type(s) for +: 'int' and 'str'"
+     ]
+    }
+   ],
+   "source": [
+    "sumOfTwo(3, \"baduser\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Unit testing\n",
+    "\n",
+    "Unit testing refers to tests that verify the functionality of a code unit, typically a function. Asserts are a quick way to test a piece of code but they don't provide us with much detail (e.g. how different is the result we obtained from the expected one?). \n",
+    "Luckily, Python provides us with a specific module for unit testing: *unittest*.\n",
+    "\n",
+    "*unittest* is an OOP-based module - you need to subclass the ```unittest.TestCase``` class:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fibonacci(5): [1, 1, 2, 3, 5]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import unittest\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    lst = []\n",
+    "    for i in range(0, n):\n",
+    "        if(i <= 1):\n",
+    "            lst.append(1)\n",
+    "        else:\n",
+    "            lst.append(lst[i-2] + lst[i-1])\n",
+    "    return(lst)\n",
+    "\n",
+    "print(\"Fibonacci(5):\", fibonacci(5))\n",
+    "\n",
+    "class FibonacciTest(unittest.TestCase):\n",
+    "\n",
+    "    def test_listLength(self):\n",
+    "        self.assertEqual(len(fibonacci(4)), 4)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The test methods name begins with ```test_```.  \n",
+    "\n",
+    "```unittest``` offers many types of assertions: ```assertTrue```, ```assertEqual```, ```assertListEquals``` and more.  \n",
+    "\n",
+    "In a command-line environment, the unit test woud be launched by typing:\n",
+    "```python3 -m unittest file_test```  \n",
+    "\n",
+    "*Optional, not needed here:* If you are in a notebook, we need to invoke the module explicitly:\n",
+    "```unittest.main(argv=[''], verbosity=2, exit=False)```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "**Example**\n",
+    "\n",
+    "Try yourself to complete the ```FibonacciTest``` class by adding the following asserts:\n",
+    "\n",
+    "1. check that the last (highest) number is correct\n",
+    "2. check that a negative ```n``` provided as input does not break the function\n",
+    "3. check that a floating point ```n``` as input does not break the function  \n",
+    "\n",
+    "<div class=\"tggle\" onclick=\"toggleVisibility('example1');\">Show/Hide Solution</div>\n",
+    "<div id=\"example1\" style=\"display:none;\">"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fibonacci(5): [1, 1, 2, 3, 5]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import unittest\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    lst = []\n",
+    "    for i in range(0, n):\n",
+    "        if(i <= 1):\n",
+    "            lst.append(1)\n",
+    "        else:\n",
+    "            lst.append(lst[i-2] + lst[i-1])\n",
+    "    return(lst)\n",
+    "\n",
+    "print(\"Fibonacci(5):\", fibonacci(5))\n",
+    "\n",
+    "class FibonacciTest(unittest.TestCase):\n",
+    "\n",
+    "    def test_listLength(self):\n",
+    "        self.assertEqual(len(fibonacci(4)), 4) # fibonacci(4)) returns 4 numbers\n",
+    "\n",
+    "    def test_checkLast(self):\n",
+    "        self.assertEqual(max(fibonacci(5)), 5) # last number of fibonacci(5)) is 5\n",
+    "\n",
+    "    def test_checkNegative(self):\n",
+    "        self.assertIsNotNone(fibonacci(-10)) # fibonacci(-10) returns something\n",
+    "\n",
+    "    def test_checkFloatingPoint(self):\n",
+    "        self.assertIsNotNone(fibonacci(4.5)) # what happens here?"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "</div>\n",
+    "The ```checkFloatingPoint``` test fails. Let's fix the ```fibonacci``` function to solve the issue and run the unit tests again!  \n",
+    "  \n",
+    "  "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "What if we decide to *not* accept a floating point input? We can raise a ```TypeError```  exception and modify the unit test accordingly.\n",
+    "\n",
+    "For a preliminary guide to Python exceptions, please refer to the official Python tutorial: [https://docs.python.org/3/tutorial/errors.html](https://docs.python.org/3/tutorial/errors.html)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fibonacci(5): [1, 1, 2, 3, 5]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import unittest\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    if isinstance(n, int):\n",
+    "        lst = []\n",
+    "        for i in range(0, n):\n",
+    "            if(i <= 1):\n",
+    "                lst.append(1)\n",
+    "            else:\n",
+    "                lst.append(lst[i-2] + lst[i-1])\n",
+    "        return(lst)\n",
+    "    else:\n",
+    "        raise(TypeError) # we raise an exception!\n",
+    "\n",
+    "print(\"Fibonacci(5):\", fibonacci(5))\n",
+    "\n",
+    "class FibonacciTest(unittest.TestCase):\n",
+    "\n",
+    "    def test_listLength(self):\n",
+    "        self.assertEqual(len(fibonacci(4)), 4) # fibonacci(4)) returns 4 numbers\n",
+    "\n",
+    "    def test_checkLast(self):\n",
+    "        self.assertEqual(max(fibonacci(5)), 5) # last number of fibonacci(5)) is 5\n",
+    "\n",
+    "    def test_checkNegative(self):\n",
+    "        self.assertIsNotNone(fibonacci(-10)) # fibonacci(-10) returns something\n",
+    "    \n",
+    "    def test_checkFloatingPoint(self):\n",
+    "        with self.assertRaises(TypeError): # fibonacci(4.5) has to raise an exception\n",
+    "            fibonacci(4.5)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise\n",
+    "\n",
+    "Modify the ```FibonacciTest``` class to:\n",
+    "\n",
+    "1. raise a ```ValueError``` exception if the provided ```n``` is negative\n",
+    "2. check that a big ```n``` (>>100, for example 100,000) does not raise a ```MemoryError``` exception\n",
+    "\n",
+    "<div class=\"tggle\" onclick=\"toggleVisibility('ex1');\">Show/Hide Solution</div>\n",
+    "<div id=\"ex1\" style=\"display:none;\">"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fibonacci(5): [1, 1, 2, 3, 5]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import unittest\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    if isinstance(n, int):\n",
+    "        if n > 0:\n",
+    "            lst = []\n",
+    "            for i in range(0, n):\n",
+    "                if(i <= 1):\n",
+    "                    lst.append(1)\n",
+    "                else:\n",
+    "                    lst.append(lst[i-2] + lst[i-1])\n",
+    "            return(lst)\n",
+    "        else:\n",
+    "            raise(ValueError) # we raise an exception!\n",
+    "    else:\n",
+    "        raise(TypeError) # we raise another exception!\n",
+    "\n",
+    "print(\"Fibonacci(5):\", fibonacci(5))\n",
+    "\n",
+    "class FibonacciTest(unittest.TestCase):\n",
+    "\n",
+    "    def test_listLength(self):\n",
+    "        self.assertEqual(len(fibonacci(4)), 4) # fibonacci(4)) returns 4 numbers\n",
+    "\n",
+    "    def test_checkLast(self):\n",
+    "        self.assertEqual(max(fibonacci(5)), 5) # last number of fibonacci(5)) is 5\n",
+    "\n",
+    "    def test_checkNegative(self):\n",
+    "        with self.assertRaises(ValueError):\n",
+    "            fibonacci(-10) # fibonacci(-10) has to raise an exception this time...\n",
+    "    \n",
+    "    def test_checkFloatingPoint(self):\n",
+    "        with self.assertRaises(TypeError): # fibonacci(4.5) has to raise an exception\n",
+    "            fibonacci(4.5)\n",
+    "    \n",
+    "    def test_checkBig(self):\n",
+    "        self.assertIsNotNone(fibonacci(100000)) # test fibonacci(100000) for memory issues\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "</div>  \n",
+    "## Measuring time\n",
+    "\n",
+    "Another aspect of testing is to probe the time and memory required by your algorithms to be executed under different inputs and parameters.  \n",
+    "  \n",
+    "Python provides the ```timeit``` package to measure the execution time of small snippets of code.  \n",
+    "Execution of the snippet is repeated multiple times (```number``` parameter) to allow obtaining an estimate also for the quickest snippets :\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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",
+      "text/plain": [
+       "<Figure size 640x480 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "import timeit\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    if isinstance(n, int):\n",
+    "        if n > 0:\n",
+    "            lst = []\n",
+    "            for i in range(0, n):\n",
+    "                if(i <= 1):\n",
+    "                    lst.append(1)\n",
+    "                else:\n",
+    "                    lst.append(lst[i-2] + lst[i-1])\n",
+    "            return(lst)\n",
+    "        else:\n",
+    "            raise(ValueError)\n",
+    "    else:\n",
+    "        raise(TypeError)\n",
+    "\n",
+    "# setup ensures that timeit can access specific functions from your local environment\n",
+    "timeit.timeit('fibonacci(5)', number=10000, setup=\"from __main__ import fibonacci\")\n",
+    "\n",
+    "times = []\n",
+    "times.append(timeit.timeit('fibonacci(5)', number=10000, setup=\"from __main__ import fibonacci\"))\n",
+    "times.append(timeit.timeit('fibonacci(10)', number=10000, setup=\"from __main__ import fibonacci\"))\n",
+    "times.append(timeit.timeit('fibonacci(15)', number=10000, setup=\"from __main__ import fibonacci\"))\n",
+    "\n",
+    "timeSeries = pd.Series(times)\n",
+    "timeSeries.plot()\n",
+    "# to change x labels...\n",
+    "plt.xticks([0, 1, 2], ['fibonacci(5)', 'fibonacci(10)', 'fibonacci(15)'])\n",
+    "plt.show()\n",
+    "plt.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![fibonacciTimes](images/fibonacciTimes.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise\n",
+    "\n",
+    "Write the ```recursiveFibonacci``` function that computes the n-th Fibonacci number recursively.  \n",
+    "Test the execution times of the two fibonacci functions with ```n``` ranging from 1 to 20 and plot the two distributions\n",
+    "\n",
+    "<div class=\"tggle\" onclick=\"toggleVisibility('ex2');\">Show/Hide Solution</div>\n",
+    "<div id=\"ex2\" style=\"display:none;\">"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "import timeit\n",
+    "\n",
+    "def fibonacci(n):\n",
+    "    if isinstance(n, int):\n",
+    "        if n > 0:\n",
+    "            lst = []\n",
+    "            for i in range(0, n):\n",
+    "                if(i <= 1):\n",
+    "                    lst.append(1)\n",
+    "                else:\n",
+    "                    lst.append(lst[i-2] + lst[i-1])\n",
+    "            return(lst)\n",
+    "        else:\n",
+    "            raise(ValueError)\n",
+    "    else:\n",
+    "        raise(TypeError)\n",
+    "\n",
+    "def recursiveFibonacci(n):\n",
+    "    if n == 1:\n",
+    "        return 0\n",
+    "    elif n == 2:\n",
+    "        return 1\n",
+    "    else:\n",
+    "        return recursiveFibonacci(n-1) + recursiveFibonacci(n-2)\n",
+    "\n",
+    "timesIterative = []\n",
+    "for n in range(1, 20):\n",
+    "    timesIterative.append(timeit.timeit('fibonacci(+' + str(n) + ')', number=1000, setup=\"from __main__ import fibonacci\"))\n",
+    "\n",
+    "timesRecursive = []\n",
+    "for n in range(1, 20):\n",
+    "    timesRecursive.append(timeit.timeit('recursiveFibonacci(+' + str(n) + ')', number=1000, setup=\"from __main__ import recursiveFibonacci\"))\n",
+    "\n",
+    "timesDict = {'iterative': timesIterative, 'recursive': timesRecursive}\n",
+    "timesDf = pd.DataFrame(timesDict)\n",
+    "timesDf.plot(logy=True) # plot times in logarithmic scale to highlight differences\n",
+    "plt.show()\n",
+    "plt.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![fibonacciTimesRec](images/fibonacciTimesRec.png)\n",
+    "\n",
+    "</div>\n",
+    "## Measuring memory\n",
+    "\n",
+    "Memory used by an object, function or full Python scripts can be measured by different means.  \n",
+    "\n",
+    "The ```sys.getsizeof``` method is one of them: \n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1656\n",
+      "3256\n"
+     ]
+    }
+   ],
+   "source": [
+    "import sys\n",
+    "\n",
+    "l1 = [1]*200\n",
+    "l2 = [2]*400\n",
+    "\n",
+    "print(sys.getsizeof(l1))\n",
+    "print(sys.getsizeof(l2))\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "However, measuring the memory footprint of a whole function (rather than single objects), would be much more useful.  \n",
+    "We can achieve that, for instance, with the ```memory-profiler``` package.\n",
+    "\n",
+    "You can install it with pip: ```pip install -U memory_profiler```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Save this file as memProfSample.py\n",
+    "\n",
+    "from memory_profiler import profile\n",
+    "\n",
+    "@profile\n",
+    "def allocatingFunction():\n",
+    "    a = [1] * (10 ** 6)\n",
+    "    b = [2] * (2 * 10 ** 7)\n",
+    "    del b\n",
+    "    return a\n",
+    "\n",
+    "if __name__ == '__main__':\n",
+    "    allocatingFunction()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Filename: memProfSample.py\n",
+    "\n",
+    "Line #    Mem usage    Increment  Occurences   Line Contents\n",
+    "============================================================\n",
+    "     5     39.9 MiB     39.9 MiB           1   @profile\n",
+    "     6                                         def allocatingFunction():\n",
+    "     7     47.5 MiB      7.6 MiB           1       a = [1] * (10 ** 6)\n",
+    "     8    200.1 MiB    152.6 MiB           1       b = [2] * (2 * 10 ** 7)\n",
+    "     9     47.5 MiB   -152.6 MiB           1       del b\n",
+    "    10     47.5 MiB      0.0 MiB           1       return a"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Exercise\n",
+    "\n",
+    "Test the functionalities introduced in this practical to analyze some of the programs developed during the past lessons.\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.15"
+  },
+  "orig_nbformat": 2
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
