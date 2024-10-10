@@ -1,0 +1,1418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2, Practical 5 &mdash; sciprog-ds-M2-24_25  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            sciprog-ds-M2-24_25
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">     Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../M2_practical1.html">     Module 2, Practical 1</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sciprog-ds-M2-24_25</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module 2, Practical 5</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/notebooks-to-exclude/M2_practical5.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Module-2,-Practical-5">
+<h1>Module 2, Practical 5<a class="headerlink" href="#Module-2,-Practical-5" title="Link to this heading"></a></h1>
+<p>In this practical we will work with sorting algorithms.</p>
+<section id="Sorting-algorithms">
+<h2>Sorting algorithms<a class="headerlink" href="#Sorting-algorithms" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">The basic principle of sorting algorithms is quite simple:</div>
+<div class="line">&gt;given an input sequence (<span class="math notranslate nohighlight">\(U\)</span>) of (at least partially) un-sorted elements <span class="math notranslate nohighlight">\(U=u_{1},u_{2}, ..., u_{n}\)</span>, output a new sequence <span class="math notranslate nohighlight">\(S = s_{1}, s_{2}, ... , s_{n}\)</span> which is a permutation of the elements in <span class="math notranslate nohighlight">\(U\)</span> such that <span class="math notranslate nohighlight">\(s_{1}\leq s_{2}, ..., \leq s_{n}\)</span>.</div>
+</div>
+<p>Several sorting algorithms exist, the first one we will work with is <strong>selection sort</strong>.</p>
+</section>
+<section id="Selection-sort">
+<h2>Selection sort<a class="headerlink" href="#Selection-sort" title="Link to this heading"></a></h2>
+<p>Selection sort is the simplest of the sorting algorithms.</p>
+<p>The idea of <strong>selection sort</strong> is that given <span class="math notranslate nohighlight">\(U=u_{1},u_{2},...,u_{n}\)</span> the algorithm loops through all the elements of <span class="math notranslate nohighlight">\(U\)</span>, finds the minimum <span class="math notranslate nohighlight">\(u_m\)</span> and places it at the beginning of the sequence <span class="math notranslate nohighlight">\(U\)</span>, swapping <span class="math notranslate nohighlight">\(u_{1}\)</span> with <span class="math notranslate nohighlight">\(u_m\)</span>. At the next iteration, the algorithm continues looking for the minimum starting from <span class="math notranslate nohighlight">\(u_2\)</span> and so on.</p>
+<p>If <span class="math notranslate nohighlight">\(U\)</span> has <span class="math notranslate nohighlight">\(n\)</span> elements, we need to perform the following two steps for each position <span class="math notranslate nohighlight">\(i=0,..,n-1\)</span> in the list:</p>
+<ol class="arabic simple">
+<li><p>(argmin) Find index of the minimum element in the sublist <span class="math notranslate nohighlight">\(U[i:]\)</span>, let’s call it <span class="math notranslate nohighlight">\(min\)</span> (i.e. <span class="math notranslate nohighlight">\(u_{min} = min(U[i:])\)</span>);</p></li>
+<li><p>(swap) Swap <span class="math notranslate nohighlight">\(u_{min}\)</span> with <span class="math notranslate nohighlight">\(u_i\)</span>;</p></li>
+</ol>
+<p>A reminder on how selection sort works is shown in this picture taken from the lecture slides. Yellow cells are the minimum found at each iteration, while orange cells are those already sorted by previous iterations.</p>
+<img alt="notebooks/notebooks-to-exclude/images/selection_sort.png" src="notebooks/notebooks-to-exclude/images/selection_sort.png" />
+<p>A good implementation of this sorting algorithm has complexity <span class="math notranslate nohighlight">\(O(n^2)\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of elements in the list to sort.</p>
+<section id="A-base-class-for-sorting-algorithms">
+<h3>A base class for sorting algorithms<a class="headerlink" href="#A-base-class-for-sorting-algorithms" title="Link to this heading"></a></h3>
+<p>Implement a base class, <code class="docutils literal notranslate"><span class="pre">SortingAlgorithm</span></code>, that has the following attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (the actual data to sort)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations</span></code> (initialized to 0) that counts how many swaps have been done to perform the sorting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comparisons</span></code> (initialized to 0) that counts how many comparisons have been done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code> a boolean (default= True) that is used to decide if the method should report what is happening at each step and some stats or not.</p></li>
+</ul>
+<p>The class has one method, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, that implements the sort algorithm (empty for the base class)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="n">sa</span> <span class="o">=</span> <span class="n">SortingAlgorithm</span><span class="p">([])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
+<span class="n">sa</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;__main__.SortingAlgorithm object at 0x7fc80a62a940&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NotImplementedError</span>                       Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb Cell 4</span> line <span class="ansi-cyan-fg">2
+</span><span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb#W3sZmlsZQ%3D%3D?line=19&#39;&gt;20&lt;/a&gt;</span> sa = SortingAlgorithm([])
+<span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb#W3sZmlsZQ%3D%3D?line=20&#39;&gt;21&lt;/a&gt;</span> print(sa)
+<span class="ansi-green-fg">---&gt; &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb#W3sZmlsZQ%3D%3D?line=21&#39;&gt;22&lt;/a&gt;</span> sa.sort()
+
+<span class="ansi-green-intense-fg ansi-bold">/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb Cell 4</span> line <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb#W3sZmlsZQ%3D%3D?line=16&#39;&gt;17&lt;/a&gt;</span> def sort(self):
+<span class="ansi-green-fg">---&gt; &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical5.ipynb#W3sZmlsZQ%3D%3D?line=17&#39;&gt;18&lt;/a&gt;</span>     raise NotImplementedError
+
+<span class="ansi-red-fg">NotImplementedError</span>:
+</pre></div></div>
+</div>
+<p>Please, note that the method <code class="docutils literal notranslate"><span class="pre">sort</span></code> raises an exception <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>. Exceptions are used to detect and manage errors occurred during execution. Exceptions can be raised thorough the instruction <code class="docutils literal notranslate"><span class="pre">raise</span></code> and they can be captured by the construct <code class="docutils literal notranslate"><span class="pre">try</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;myfile.txt&#39;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="c1"># code executed if an exception OSError is raised during the execution of the code in the try instruction block</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OS error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="c1"># exception ValueError</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not convert data to an integer.&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># general exception</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unexpected error:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">raise</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># optional, collects code that has to be executed ONLY if no exceptions are raised</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OS error: [Errno 2] No such file or directory: &#39;myfile.txt&#39;
+</pre></div></div>
+</div>
+<p>In our praticals we will not use extensively Python exceptions. For a detailed explanation on how to manage errors and exceptions in Python, we refer to the official language tutorial <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">https://docs.python.org/3/tutorial/errors.html</a>.</p>
+</section>
+<section id="Exercise-(implementation)">
+<h3>Exercise (implementation)<a class="headerlink" href="#Exercise-(implementation)" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Implement a class SelectionSort that inherits from the base class, with the following attributes:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (the actual data to sort)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations</span></code> (initialized to 0) that counts how many swaps have been done to perform the sorting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comparisons</span></code> (initialized to 0) that counts how many comparisons have been done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code> a boolean (default= True) that is used to decide if the method should report what is happening at each step and some stats or not.</p></li>
+</ul>
+<p>The class implements the sort method, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, that implements the selection sort algorithm (two more <em>private</em> methods might be needed to compute <code class="docutils literal notranslate"><span class="pre">swap</span></code> and <code class="docutils literal notranslate"><span class="pre">argmin</span></code> – see description above).</p>
+<p>Once you implemented the class, test it with some data like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[7, 5, 10, -11 ,3, -4, 99, 1]
+</pre></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;SelectionSort&#39;);"><p>Show/Hide Implementation</p>
+</div><div id="SelectionSort" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="k">class</span> <span class="nc">SelectionSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        swaps elements i and j in data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">):</span> <span class="c1">#no point in swapping if i==j</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swapping position </span><span class="si">{}</span><span class="s2"> with </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__argmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the index of the smallest element of</span>
+<span class="sd">        self.__data[i:]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mpos</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">minV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">mpos</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minV</span><span class="p">:</span>
+                <span class="n">mpos</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="n">minV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="c1"># keep track of what was done</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">mpos</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argmin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># this code is executed when SelectionSort is directly executed...</span>
+    <span class="c1"># https://docs.python.org/3/library/__main__.html</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">selSorter</span> <span class="o">=</span> <span class="n">SelectionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">selSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">selSorter</span> <span class="o">=</span> <span class="n">SelectionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">selSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of swaps: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">selSorter</span> <span class="o">=</span> <span class="n">SelectionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">selSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of swaps: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+
+    <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">test</span> <span class="ow">and</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="p">]</span><span class="o">&lt;=</span> <span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorting test passed? </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Swapping position 0 with 3
+Swapping position 1 with 5
+Swapping position 2 with 7
+Swapping position 3 with 4
+Swapping position 4 with 5
+Swapping position 6 with 7
+[-11, -4, 1, 3, 5, 7, 10, 99]
+
+Number of elements: 1000
+Number of comparisons: 499500
+Number of swaps: 990
+
+Number of elements: 2000
+Number of comparisons: 1999000
+Number of swaps: 1985
+
+Sorting test passed? True
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="sorting_algos/SelectionSort.py">SelectionSort.py</a></p>
+</div></section>
+</section>
+<section id="Insertion-sort">
+<h2>Insertion sort<a class="headerlink" href="#Insertion-sort" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">The second sorting algorithm we will see is <strong>insertion sort</strong>. As for selection sort, this algorithm builds the solution one element at a time. It is not a very efficient sorting algorithm but it is quite simple and has several advantages.</div>
+<div class="line">Indeed, it is an <em>in place</em> algorithm (i.e. it does not need to copy the array to sort it therefore it is easy on memory), and it can be efficient for <em>nearly sorted</em> lists. <em>This is the algorithm that people use when sorting a deck of cards.</em></div>
+</div>
+<p>The algorithm builds a sorted list step by step. At each iteration it removes one element from the list, placing it in the correct position within the growing sorted list.</p>
+<div class="line-block">
+<div class="line">The algorithm makes use of two indexes: <span class="math notranslate nohighlight">\(i\)</span> moving on the un-sorted part of the list and <span class="math notranslate nohighlight">\(j\)</span>, on the growing sorted part of the list. The index <span class="math notranslate nohighlight">\(i\)</span> starts from 1 and loops up to the end of the list, while <span class="math notranslate nohighlight">\(j\)</span> starts from <span class="math notranslate nohighlight">\(i\)</span> at each iteration and goes down to finding the place where the element at index <span class="math notranslate nohighlight">\(i\)</span> should go in the sorted list, pushing the other elements up while finding the right place.</div>
+<div class="line">An element at position <span class="math notranslate nohighlight">\(h\)</span> is pushed-up by copying <span class="math notranslate nohighlight">\(u_h\)</span> to position <span class="math notranslate nohighlight">\(h+1\)</span>.</div>
+</div>
+<p>Given an unsorted list <span class="math notranslate nohighlight">\(U = u_0, u_1, ..., u_n\)</span>:</p>
+<p>For each <span class="math notranslate nohighlight">\(i\)</span> from 1 to <span class="math notranslate nohighlight">\(l = length(list)\)</span>:</p>
+<ol class="arabic simple">
+<li><p>get <span class="math notranslate nohighlight">\(u_i\)</span> and store it in a temporary variable <span class="math notranslate nohighlight">\(temp\)</span>;</p></li>
+<li><p>for <span class="math notranslate nohighlight">\(j = i\)</span>,…,0 push <span class="math notranslate nohighlight">\(u_{j-1}\)</span> to position <span class="math notranslate nohighlight">\(j\)</span> until <span class="math notranslate nohighlight">\(temp\)</span> &gt; <span class="math notranslate nohighlight">\(u_{j-1}\)</span>. If <span class="math notranslate nohighlight">\(j\)</span> exists such that <span class="math notranslate nohighlight">\(temp\)</span> &lt; <span class="math notranslate nohighlight">\(u_j\)</span>, place <span class="math notranslate nohighlight">\(temp\)</span> at position <span class="math notranslate nohighlight">\(j\)</span>, otherwise place <span class="math notranslate nohighlight">\(temp\)</span> in position <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+</ol>
+<p>A graphical representation of the algorithm (from the lecture slides) follows:</p>
+<p><img alt="image1" src="notebooks/notebooks-to-exclude/images/insertion_sort1.png" /> <img alt="image2" src="notebooks/notebooks-to-exclude/images/insertion_sort2.png" /> <img alt="image3" src="notebooks/notebooks-to-exclude/images/insertion_sort3.png" /></p>
+<p>The worst case complexity of this algorithm is <span class="math notranslate nohighlight">\(O(n^2)\)</span>, with <span class="math notranslate nohighlight">\(n\)</span> being the number of elements in the list. If one element is no more than <span class="math notranslate nohighlight">\(k\)</span> places away from its place in the sorted array, the real complexity goes to <span class="math notranslate nohighlight">\(O(kn)\)</span>. <em>The cost of the algorithm is therefore dependent on the sorting of the input list.</em></p>
+<p>Another graphical representation of the algorithm follows (from geeksforgeeks.org). At each iteration, red boxes are pushed to the right to make room for the green element.</p>
+<img alt="notebooks/notebooks-to-exclude/images/ins_sort_pic.png" src="notebooks/notebooks-to-exclude/images/ins_sort_pic.png" />
+<section id="id1">
+<h3>Exercise (implementation)<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple" start="2">
+<li><p>Implement a class <code class="docutils literal notranslate"><span class="pre">InsertionSort</span></code> that inherits from the base class and has the following attributes:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (the actual data to sort)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations</span></code> (initialized to 0) that counts how many swaps (movements of data to the left) have been done to perform the sorting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comparisons</span></code> (initialized to 0) that counts how many comparisons have been done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>, a boolean (default= True) used to decide if the method should report what is happening at each step and some stats or not</p></li>
+</ul>
+<p>The class should implement the <code class="docutils literal notranslate"><span class="pre">sort</span></code> method.</p>
+<div class="tggle" onclick="toggleVisibility(&#39;InsertionSort&#39;);"><p>Show/Hide Implementation</p>
+</div><div id="InsertionSort" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="k">class</span> <span class="nc">InsertionSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2"> comp: </span><span class="si">{}</span><span class="s2"> push+place:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+                                                          <span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operations</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># this code is executed when SelectionSort is directly executed...</span>
+    <span class="c1"># https://docs.python.org/3/library/__main__.html</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">insSorter</span> <span class="o">=</span> <span class="n">InsertionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">insSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">insSorter</span> <span class="o">=</span> <span class="n">InsertionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">insSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">insSorter</span> <span class="o">=</span> <span class="n">InsertionSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">insSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+
+    <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">test</span> <span class="ow">and</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="p">]</span><span class="o">&lt;=</span> <span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorting test passed? </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+It. 1: [5, 7, 10, -11, 3, -4, 99, 1] comp: 1 push+place:2
+It. 2: [5, 7, 10, -11, 3, -4, 99, 1] comp: 2 push+place:3
+It. 3: [-11, 5, 7, 10, 3, -4, 99, 1] comp: 5 push+place:7
+It. 4: [-11, 3, 5, 7, 10, -4, 99, 1] comp: 9 push+place:11
+It. 5: [-11, -4, 3, 5, 7, 10, 99, 1] comp: 14 push+place:16
+It. 6: [-11, -4, 3, 5, 7, 10, 99, 1] comp: 15 push+place:17
+It. 7: [-11, -4, 1, 3, 5, 7, 10, 99] comp: 21 push+place:23
+[-11, -4, 1, 3, 5, 7, 10, 99]
+
+Number of comparisons: 21
+Number of push-ups+place: 23
+[-11, -4, 1, 3, 5, 7, 10, 99]
+
+Number of elements: 1000
+Number of comparisons: 245791
+Number of push-ups+place: 245797
+
+Number of elements: 2000
+Number of comparisons: 983021
+Number of push-ups+place: 983029
+
+Sorting test passed? True
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="sorting_algos/InsertionSort.py">InsertionSort.py</a></p>
+</div></section>
+</section>
+<section id="Merge-sort-and-Quick-sort">
+<h2>Merge sort and Quick sort<a class="headerlink" href="#Merge-sort-and-Quick-sort" title="Link to this heading"></a></h2>
+<p>These are <em>divide et impera</em> algorithms (latin, <em>divide and conquer</em> in English) and they work by:</p>
+<ol class="arabic simple">
+<li><p><em>dividing</em> the original problem in smaller problems (based on parameters such as the size of the input list);</p></li>
+<li><p>recursively <em>solving the smaller problems</em> (splitting them until the minimum unit – the base case – is reached and solved);</p></li>
+<li><p>combining the partial results in the final solution.</p></li>
+</ol>
+<section id="Merge-sort">
+<h3>Merge sort<a class="headerlink" href="#Merge-sort" title="Link to this heading"></a></h3>
+<p>The idea of <strong>merge sort</strong> is that given an unsorted list <span class="math notranslate nohighlight">\(U=u_{1},u_{2},...,u_{n}\)</span> the <span class="math notranslate nohighlight">\(MergeSort\)</span> procedure:</p>
+<ol class="arabic simple">
+<li><p>breaks the list <span class="math notranslate nohighlight">\(U\)</span> in two similarly sized lists (if the size is odd, the first list is always one element bigger than the other);</p></li>
+<li><p>calls <span class="math notranslate nohighlight">\(MergeSort\)</span> recursively on the two sublists, until we have sublists of one element only, which are ordered by definition;</p></li>
+<li><p>merges the two already sorted sublists in a sorted list.</p></li>
+</ol>
+<div class="line-block">
+<div class="line">The base-case of this algorithm is that lists with size <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> are ordered and are ready to be merged, therefore the algorithm keeps splitting partial lists in two sublists until these reach the length <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span>. At that point the two lists are merged into a bigger <strong>sorted</strong> list by using a <strong>merge</strong> method.</div>
+<div class="line">This is done recursively until only one list is obtained, which is the final result.</div>
+</div>
+<p>The algorithm makes use of three methods:</p>
+<ol class="arabic simple">
+<li><p>(<code class="docutils literal notranslate"><span class="pre">merge</span></code>): gets two sorted lists and produces a sorted list that contains all the elements of the two lists. This method builds the return list by getting the minimum element of the two lists, “removing” it from the corresponding list and appending it to the list with the result. “removal” can be done by using two indexes pointing to the smallest elements of each of the two (sub)lists and incrementing the index of the minimum of the two (i.e. the element that is also copied to the result
+list);</p></li>
+<li><p>(<code class="docutils literal notranslate"><span class="pre">recursiveMergeSort</span></code>): gets an unordered (sub)list, the index of the beginning of the list, and the index of the end of the list. It recursively splits it in two halves until it reaches lists with length <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(1\)</span> - at that point it starts merging pairs of sorted lists to build the result;</p></li>
+<li><p>(<code class="docutils literal notranslate"><span class="pre">mergeSort</span></code>) gets a list and applies the recursiveMergeSort method to it starting from position <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(len - 1\)</span>.</p></li>
+</ol>
+<p>A reminder on how merge sort works is shown here (from the lecture slides). The first part is the splitting of the initial list into smaller lists, until the base level is reached with <code class="docutils literal notranslate"><span class="pre">recursiveMergeSort</span></code>.</p>
+<img alt="notebooks/notebooks-to-exclude/images/merge_sort1.png" src="notebooks/notebooks-to-exclude/images/merge_sort1.png" />
+<p>This second picture shows how the sorted list can be reconstructed by applying the <code class="docutils literal notranslate"><span class="pre">merge</span></code> method to pairs of sorted lists.</p>
+<img alt="notebooks/notebooks-to-exclude/images/merge_sort2.png" src="notebooks/notebooks-to-exclude/images/merge_sort2.png" />
+<p>A good implementation of this sorting algorithm has complexity <span class="math notranslate nohighlight">\(O(n log (n))\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of elements in the list to sort.</p>
+</section>
+<section id="Exercise-(Implementation)">
+<h3>Exercise (Implementation)<a class="headerlink" href="#Exercise-(Implementation)" title="Link to this heading"></a></h3>
+<ol class="arabic simple" start="3">
+<li><p>Implement a class <code class="docutils literal notranslate"><span class="pre">MergeSort</span></code> that inherits from the base class and has the following attributes:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (the actual data to sort)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations</span></code> (initialized to 0) that counts how many recursive calls have been done to perform the sorting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comparisons</span></code> (initialized to 0) that counts how many comparisons have been done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> attribute that keeps track of the elapsed time (hint: use the Python <code class="docutils literal notranslate"><span class="pre">time</span></code> module)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code> a boolean (default= True) that is used to decide if the method should report what is happening at each step and some stats or not.</p></li>
+</ul>
+<p>The class implements the <code class="docutils literal notranslate"><span class="pre">sort</span></code> method that implements the merge sort algorithm (two more <em>private</em> methods might be needed to compute <code class="docutils literal notranslate"><span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">recursiveMergeSort</span></code> – see description above).</p>
+<p>Once you implemented the class you can test it with some data like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[7, 5, 10, -11 ,3, -4, 99, 1]
+</pre></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;MergeSort&#39;);"><p>Show/Hide Implementation</p>
+</div><div id="MergeSort" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="k">class</span> <span class="nc">MergeSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing merge(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">mid</span><span class="p">))</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">mid</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">last</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">mid</span><span class="p">:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">first</span><span class="p">:</span><span class="n">first</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__recursiveMergeSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing recursive merge sort(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="c1">#&lt;- index so mid+1 elements go in the first sublist!!!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__merge</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">mid</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># this code is executed when SelectionSort is directly executed...</span>
+    <span class="c1"># https://docs.python.org/3/library/__main__.html</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
+    <span class="n">mergeSorter</span> <span class="o">=</span> <span class="n">MergeSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">mergeSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">mergeSorter</span> <span class="o">=</span> <span class="n">MergeSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">mergeSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of swaps: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">mergeSorter</span> <span class="o">=</span> <span class="n">MergeSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">mergeSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of recursions: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mergeSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+
+    <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">test</span> <span class="ow">and</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="p">]</span><span class="o">&lt;=</span> <span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorting test passed? </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Executing recursive merge sort(0,6)...
+Executing recursive merge sort(0,3)...
+Executing recursive merge sort(0,1)...
+Executing recursive merge sort(0,0)...
+Executing recursive merge sort(1,1)...
+Executing merge(0,1,0)...
+Executing recursive merge sort(2,3)...
+Executing recursive merge sort(2,2)...
+Executing recursive merge sort(3,3)...
+Executing merge(2,3,2)...
+Executing merge(0,3,1)...
+Executing recursive merge sort(4,6)...
+Executing recursive merge sort(4,5)...
+Executing recursive merge sort(4,4)...
+Executing recursive merge sort(5,5)...
+Executing merge(4,5,4)...
+Executing recursive merge sort(6,6)...
+Executing merge(4,6,5)...
+Executing merge(0,6,3)...
+[-11, -4, 3, 5, 7, 10, 99]
+
+Number of elements: 1000
+Number of comparisons: 8713
+Number of swaps: 1999
+In 0.0022s
+
+Number of elements: 2000
+Number of comparisons: 19409
+Number of recursions: 3999
+In 0.0047s
+
+Sorting test passed? True
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="sorting_algos/MergeSort.py">MergeSort.py</a></p>
+</div></section>
+<section id="Quick-sort">
+<h3>Quick sort<a class="headerlink" href="#Quick-sort" title="Link to this heading"></a></h3>
+<p>The last sorting algorithm we will see is <strong>quick sort</strong>. As for merge sort, this algorithm follows the <em>divide et impera</em> paradigm and its easiest implementation is recursive.</p>
+<p>The idea is that, given an unsorted list <span class="math notranslate nohighlight">\(U = u_1, ..., u_n\)</span>, at each step a <strong>pivot</strong> <span class="math notranslate nohighlight">\(j\)</span> is selected and elements are rearranged in a way that all <span class="math notranslate nohighlight">\(u_i\)</span> such that <span class="math notranslate nohighlight">\(u_i &lt; u_j\)</span> are placed at the left of <span class="math notranslate nohighlight">\(u_j\)</span> and all <span class="math notranslate nohighlight">\(u_h\)</span> such that <span class="math notranslate nohighlight">\(u_h\)</span> &gt; <span class="math notranslate nohighlight">\(u_j\)</span> are placed to the right of <span class="math notranslate nohighlight">\(u_j\)</span>.</p>
+<p>This <em>divide and conquer</em> approach works like that:</p>
+<ol class="arabic simple">
+<li><p>(<em>divide</em>) partition the initial list <span class="math notranslate nohighlight">\(U = u_1, .., u_n\)</span> in two non-empty sublists (reordering the elements) such that all the elements in the first sublist are lower than the elements in the second. The pivot element <span class="math notranslate nohighlight">\(u_j\)</span> is such that all the elements <span class="math notranslate nohighlight">\(u_i\)</span> for <span class="math notranslate nohighlight">\(1 \leq i \lt j\)</span> are lower than <span class="math notranslate nohighlight">\(u_j\)</span> and all <span class="math notranslate nohighlight">\(u_k\)</span> for <span class="math notranslate nohighlight">\(k &gt; j\)</span> are higher than <span class="math notranslate nohighlight">\(u_j\)</span>;</p></li>
+<li><p>(<em>conquer</em>) each sublist is recurisvely partitioned in two sublists, repeating until single elements are reached;</p></li>
+<li><p>(<em>recombine</em>) nothing is left to do to recombine the results.</p></li>
+</ol>
+<p>A graphical representation of the algorithm follows (red elements are the pivot of each sublist):</p>
+<img alt="notebooks/notebooks-to-exclude/images/quicksort.png" src="notebooks/notebooks-to-exclude/images/quicksort.png" />
+<p>The algorithm makes use of the following methods:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code>: gets the list, a <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> index, sets the first element as <strong>pivot</strong> and reorders all the elements in the list from <code class="docutils literal notranslate"><span class="pre">start</span></code> to <code class="docutils literal notranslate"><span class="pre">end</span></code> in such a way that all the elements to the left of the pivot (i.e. having index lower) are smaller than the pivot and all the elements to the right (i.e. with index higher) are bigger than the pivot. The function returns the index of the pivot;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">swap</span></code>: gets two indexes and swaps their values;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recursiveQuickSort</span></code>: gets an unordered (sub)list, with <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> positions and finds the pivot and recursively applies the same procedure to the sublists to the left and right of the pivot;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quickSort</span></code>: gets an unordered list and applies the recursive quick sort procedure to it.</p></li>
+</ol>
+<p>The pivot method is shown below (from lecture slides). The pivot is initially set to the first element of the sublist, then all the elements in the interval <code class="docutils literal notranslate"><span class="pre">start</span></code> - <code class="docutils literal notranslate"><span class="pre">end</span></code> are compared to it (using an index <span class="math notranslate nohighlight">\(i\)</span>) and placed right after the pivot if smaller (updating an index <span class="math notranslate nohighlight">\(j\)</span> on where the pivot should go at the end of the procedure), left untouched otherwise. At the end the pivot is moved to position <span class="math notranslate nohighlight">\(j\)</span>. The pivot is yellow and moved elements are pink:</p>
+<img alt="notebooks/notebooks-to-exclude/images/pivot.png" src="notebooks/notebooks-to-exclude/images/pivot.png" />
+<img alt="notebooks/notebooks-to-exclude/images/pivot_1.png" src="notebooks/notebooks-to-exclude/images/pivot_1.png" />
+<p>Another graphical representation follows. This picture highlights the selection of pivots (red), their placing after the (<code class="docutils literal notranslate"><span class="pre">pivot</span></code>) method (green) and the split of the two sublists in correspondence of the placed pivot.</p>
+<img alt="notebooks/notebooks-to-exclude/images/quick_sort1.png" src="notebooks/notebooks-to-exclude/images/quick_sort1.png" />
+<p>The average case complexity of the quick sort algorithm is <span class="math notranslate nohighlight">\(O(n log n)\)</span> with <span class="math notranslate nohighlight">\(n\)</span> being the number of elements in the list. The worst case complexity is <span class="math notranslate nohighlight">\(O(n^2)\)</span> which is worse than merge sort’s <span class="math notranslate nohighlight">\(O(n log n)\)</span>. In general, however, it performs better than merge sort.</p>
+</section>
+<section id="id3">
+<h3>Exercise (Implementation)<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ol class="arabic simple" start="4">
+<li><p>Implement a class <code class="docutils literal notranslate"><span class="pre">QuickSort</span></code> that inherits from the base class and has the following attributes:</p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> (the actual data to sort)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations</span></code> (initialized to 0) that counts how many swaps (movements of data to the left) have been done to perform the sorting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">comparisons</span></code> (initialized to 0) that counts how many comparisons have been done</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code> a boolean (default= True) that is used to decide if the method should report what is happening at each step and some stats or not.</p></li>
+</ul>
+<p>The class implements the method called <code class="docutils literal notranslate"><span class="pre">sort</span></code> that implements the quick sort algorithm (which will use the <em>private</em> methods <code class="docutils literal notranslate"><span class="pre">pivot</span></code>, <code class="docutils literal notranslate"><span class="pre">swap</span></code> and <code class="docutils literal notranslate"><span class="pre">recQuickSort</span></code>– see description above).</p>
+<p>How long does it take with a list of 10,000 elements? With 300,000?</p>
+<div class="tggle" onclick="toggleVisibility(&#39;QuickSort&#39;);"><p>Show/Hide Implementation</p>
+</div><div id="QuickSort" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+<span class="k">class</span> <span class="nc">QuickSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;swaps elements at positions i and j&quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">):</span> <span class="c1"># no point in swapping if i==j</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__pivot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets the pivot and swaps elements in [start, end]</span>
+<span class="sd">        accordingly&quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">start</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">j</span>
+
+    <span class="k">def</span> <span class="nf">__recQuickSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets the pivot and recursively applies</span>
+<span class="sd">        itself on the left and right sublists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="c1">#GET THE PIVOT</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pivot</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># this code is executed when SelectionSort is directly executed...</span>
+    <span class="c1"># https://docs.python.org/3/library/__main__.html</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span> <span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">qkSorter</span> <span class="o">=</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">qkSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">qkSorter</span> <span class="o">=</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">qkSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">qkSorter</span> <span class="o">=</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">qkSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">300000</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="n">qkSorter</span> <span class="o">=</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">qkSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of elements: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qkSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">test</span> <span class="ow">and</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="p">]</span><span class="o">&lt;=</span> <span class="n">d</span><span class="p">[</span><span class="n">el</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorting test passed? </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Number of elements: 1000
+Number of comparisons: 11367
+Number of push-ups+place: 5405
+In 0.0024s
+
+Number of elements: 10000
+Number of comparisons: 175503
+Number of push-ups+place: 58458
+In 0.0317s
+
+Number of elements: 300000
+Number of comparisons: 48681219
+Number of push-ups+place: 1873741
+In 4.5578s
+
+Sorting test passed? True
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="sorting_algos/QuickSort.py">QuickSort.py</a></p>
+</div></section>
+</section>
+<section id="Exercise-(algorithm-benchmark)">
+<h2>Exercise (algorithm benchmark)<a class="headerlink" href="#Exercise-(algorithm-benchmark)" title="Link to this heading"></a></h2>
+<ol class="arabic simple" start="5">
+<li><p>Write some python code to test the performance of selection sort, insertion sort, merge sort and quick sort with different lists of incremental size. Test the algorithms, reporting stats and running time.</p></li>
+</ol>
+<p>To complete the exercise, you will need to add the time measurement feature to the base <code class="docutils literal notranslate"><span class="pre">SortingAlgorithm</span></code> class and modify all four child classes accordingly.</p>
+<p>Finally, challenge them with the following arrays:</p>
+<ul class="simple">
+<li><p>list(range(5000))</p></li>
+<li><p>c = list(range(5000)); c.sort(reverse=True) (reverse-sorted, worst case scenario)</p></li>
+<li><p>a = list(range(1000)); b = list(range(1000,2000)); b.sort(reverse=True); sort(a+b)</p></li>
+</ul>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex1&#39;);"><p>Show/Hide Solution</p>
+</div><div id="Ex1" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">SortingAlgorithm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># novel addition!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">getOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+
+    <span class="k">def</span> <span class="nf">getComparisons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span>
+
+    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">)</span> <span class="c1"># novel addition!</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+<span class="k">class</span> <span class="nc">SelectionSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        swaps elements i and j in data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">):</span> <span class="c1">#no point in swapping if i==j</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swapping position </span><span class="si">{}</span><span class="s2"> with </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__argmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the index of the smallest element of</span>
+<span class="sd">        self.__data[i:]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mpos</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">minV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">mpos</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">minV</span><span class="p">:</span>
+                <span class="n">mpos</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="n">minV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="c1"># keep track of what was done</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">mpos</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__argmin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                <span class="c1"># keep track of what was done</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="k">class</span> <span class="nc">InsertionSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2"> comp: </span><span class="si">{}</span><span class="s2"> push+place:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span><span class="p">,</span>
+                                                           <span class="bp">self</span><span class="o">.</span><span class="n">operations</span>
+                                                          <span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of push-ups+place: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operations</span><span class="p">))</span>
+
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+
+<span class="k">class</span> <span class="nc">MergeSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">__merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">mid</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing merge(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">mid</span><span class="p">))</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">mid</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">last</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">mid</span><span class="p">:</span>
+            <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">first</span><span class="p">:</span><span class="n">first</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__recursiveMergeSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executing recursive merge sort(</span><span class="si">{}</span><span class="s2">,</span><span class="si">{}</span><span class="s2">)...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="c1">#&lt;- index so mid+1 elements go in the first sublist!!!</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="n">mid</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">last</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__merge</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">mid</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recursiveMergeSort</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="k">class</span> <span class="nc">QuickSort</span><span class="p">(</span><span class="n">SortingAlgorithm</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+    <span class="k">def</span> <span class="nf">__swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;swaps elements at positions i and j&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">def</span> <span class="nf">__pivot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets the pivot and swaps elements in [start, end]</span>
+<span class="sd">        accordingly&quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">start</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__swap</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">j</span>
+
+    <span class="k">def</span> <span class="nf">__recQuickSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;gets the pivot and recursively applies</span>
+<span class="sd">        itself on the left and right sublists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
+            <span class="c1">#GET THE PIVOT</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pivot</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparisons</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recQuickSort</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+
+<span class="c1">#Need to extend the recursion limit for the test on reverse sorted</span>
+<span class="c1">#array with 5000 elements</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">getNrandom</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10000</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">testSorters</span><span class="p">(</span><span class="n">myList</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="c1">#copy because the sorter will actually change the list!</span>
+    <span class="n">myList1</span> <span class="o">=</span> <span class="n">myList</span><span class="p">[:]</span>
+    <span class="n">myList2</span> <span class="o">=</span> <span class="n">myList</span><span class="p">[:]</span>
+    <span class="n">myList3</span> <span class="o">=</span> <span class="n">myList</span><span class="p">[:]</span>
+    <span class="n">selSorter</span> <span class="o">=</span> <span class="n">SelectionSort</span><span class="p">(</span><span class="n">myList</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">insSorter</span> <span class="o">=</span> <span class="n">InsertionSort</span><span class="p">(</span><span class="n">myList1</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">mSorter</span> <span class="o">=</span> <span class="n">MergeSort</span><span class="p">(</span><span class="n">myList2</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">qSorter</span> <span class="o">=</span> <span class="n">QuickSort</span><span class="p">(</span><span class="n">myList3</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TestList:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myList</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TestList1:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myList1</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TestList2:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myList2</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TestList3:</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myList3</span><span class="p">))</span>
+    <span class="n">selSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">insSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">mSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">qSorter</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Outputs:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">myList</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">myList1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">myList2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">myList3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test with </span><span class="si">{}</span><span class="s2"> elements&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">myList</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Insertion sort:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of operations: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">insSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selection sort:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of operations: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merge sort:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of operations: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quick sort:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of comparisons: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qSorter</span><span class="o">.</span><span class="n">getComparisons</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of operations: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qSorter</span><span class="o">.</span><span class="n">getOperations</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In </span><span class="si">{:.4f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qSorter</span><span class="o">.</span><span class="n">getTime</span><span class="p">()))</span>
+
+<span class="c1"># script that finally executes the comparisons...</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test with a list of 10 elements...&quot;</span><span class="p">)</span>
+<span class="n">testList</span> <span class="o">=</span> <span class="n">getNrandom</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">testSorters</span><span class="p">(</span><span class="n">testList</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># just for testing that everything is OK...</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#############&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test with a list of 5000 elements...&quot;</span><span class="p">)</span>
+<span class="n">testList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">))</span>
+<span class="n">testSorters</span><span class="p">(</span><span class="n">testList</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#############&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test with a list of 5000 elements in reverse order...&quot;</span><span class="p">)</span>
+<span class="n">testList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">))</span>
+<span class="n">testList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">testSorters</span><span class="p">(</span><span class="n">testList</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#############&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test with a list of 2000 elements, with last half in reverse order...&quot;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">))</span>
+<span class="n">b</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">testSorters</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Test with a list of 10 elements...
+TestList:
+[-1526, -2117, -2465, 8732, -9668, 5762, -3382, -5152, 4468, 7148]
+TestList1:
+[-1526, -2117, -2465, 8732, -9668, 5762, -3382, -5152, 4468, 7148]
+TestList2:
+[-1526, -2117, -2465, 8732, -9668, 5762, -3382, -5152, 4468, 7148]
+TestList3:
+[-1526, -2117, -2465, 8732, -9668, 5762, -3382, -5152, 4468, 7148]
+Outputs:
+[-9668, -5152, -3382, -2465, -2117, -1526, 4468, 5762, 7148, 8732]
+[-9668, -5152, -3382, -2465, -2117, -1526, 4468, 5762, 7148, 8732]
+[-9668, -5152, -3382, -2465, -2117, -1526, 4468, 5762, 7148, 8732]
+[-9668, -5152, -3382, -2465, -2117, -1526, 4468, 5762, 7148, 8732]
+Test with 10 elements
+Insertion sort:
+Number of comparisons: 28
+Number of operations: 31
+In 0.0000s
+Selection sort:
+Number of comparisons: 45
+Number of operations: 17
+In 0.0000s
+Merge sort:
+Number of comparisons: 11
+Number of operations: 19
+In 0.0000s
+Quick sort:
+Number of comparisons: 21
+Number of operations: 18
+In 0.0000s
+#############
+Test with a list of 5000 elements...
+Test with 5000 elements
+Insertion sort:
+Number of comparisons: 4999
+Number of operations: 4999
+In 0.0012s
+Selection sort:
+Number of comparisons: 12497500
+Number of operations: 4999
+In 1.0421s
+Merge sort:
+Number of comparisons: 32004
+Number of operations: 9999
+In 0.0089s
+Quick sort:
+Number of comparisons: 12497500
+Number of operations: 4999
+In 1.0317s
+#############
+Test with a list of 5000 elements in reverse order...
+Test with 5000 elements
+Insertion sort:
+Number of comparisons: 12497500
+Number of operations: 12502499
+In 2.8552s
+Selection sort:
+Number of comparisons: 12497500
+Number of operations: 7499
+In 1.1662s
+Merge sort:
+Number of comparisons: 0
+Number of operations: 9999
+In 0.0088s
+Quick sort:
+Number of comparisons: 12497500
+Number of operations: 6254999
+In 2.2319s
+#############
+Test with a list of 2000 elements, with last half in reverse order...
+Test with 2000 elements
+Insertion sort:
+Number of comparisons: 501499
+Number of operations: 501499
+In 0.1203s
+Selection sort:
+Number of comparisons: 1999000
+Number of operations: 2499
+In 0.1722s
+Merge sort:
+Number of comparisons: 6044
+Number of operations: 3999
+In 0.0032s
+Quick sort:
+Number of comparisons: 1999000
+Number of operations: 251999
+In 0.2137s
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="sorting_algos/Comparison.py">Comparison.py</a></p>
+</div></section>
+<section id="Exercise-(Counting-Sort)">
+<h2>Exercise (Counting Sort)<a class="headerlink" href="#Exercise-(Counting-Sort)" title="Link to this heading"></a></h2>
+<ol class="arabic simple" start="7">
+<li><p>Implement counting sort for a list of elements included in the range [min, max]. Counting sort’s code for the simplified case of numbers in the range [0, n] is reported below:</p></li>
+</ol>
+<img alt="notebooks/notebooks-to-exclude/images/countingsort.png" src="notebooks/notebooks-to-exclude/images/countingsort.png" />
+<p>Please note that <strong>values below zero might be present</strong> too.</p>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex3&#39;);"><p>Show/Hide Solution</p>
+</div><div id="Ex3" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">countingSort</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># will store max(A), used to extend with negative numbers</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># will store min(A), used to extend with negative numbers</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">M</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">a</span> <span class="o">-</span> <span class="n">m</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">m</span>
+            <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">countingSort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+Test 1
+[1, 7, -2, 6, -7, -5, 8, 7, 10, 4]
+[-7, -5, -2, 1, 4, 6, 7, 7, 8, 10]
+
+Test 2
+[10, 8, 9, -8, 6, 7, -2, -2, -1, -10]
+[-10, -8, -2, -2, -1, 6, 7, 8, 9, 10]
+
+Test 3
+[5, -5, -9, 2, 8, 3, -10, -4, -3, 10]
+[-10, -9, -5, -4, -3, 2, 3, 5, 8, 10]
+
+Test 4
+[7, -1, -10, -2, 9, -2, -9, -7, -10, -7]
+[-10, -10, -9, -7, -7, -2, -2, -1, 7, 9]
+
+Test 5
+[4, 6, -7, -2, 4, -3, -1, 8, 7, 7]
+[-7, -3, -2, -1, 4, 4, 6, 7, 7, 8]
+
+Test 6
+[-9, 4, 8, 6, -8, -6, -6, -10, 0, 4]
+[-10, -9, -8, -6, -6, 0, 4, 4, 6, 8]
+
+Test 7
+[-6, -7, -6, -4, 9, 4, -4, -9, -7, 6]
+[-9, -7, -7, -6, -6, -4, -4, 4, 6, 9]
+
+Test 8
+[5, -2, -10, 10, 1, 4, -9, 7, -5, 2]
+[-10, -9, -5, -2, 1, 2, 4, 5, 7, 10]
+
+Test 9
+[-2, 8, -10, 5, -7, -3, -10, -6, 6, 6]
+[-10, -10, -7, -6, -3, -2, 5, 6, 6, 8]
+
+Test 10
+[-4, 1, -1, 7, -8, -6, -4, 8, 2, -1]
+[-8, -6, -4, -4, -1, -1, 1, 2, 7, 8]
+</pre></div></div>
+</div>
+</div></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Riccardo Scandino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

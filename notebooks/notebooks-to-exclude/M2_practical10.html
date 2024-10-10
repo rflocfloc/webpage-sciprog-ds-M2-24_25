@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2, Practical 10 &mdash; sciprog-ds-M2-24_25  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            sciprog-ds-M2-24_25
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">     Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../M2_practical1.html">     Module 2, Practical 1</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sciprog-ds-M2-24_25</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module 2, Practical 10</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/notebooks-to-exclude/M2_practical10.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Module-2,-Practical-10">
+<h1>Module 2, Practical 10<a class="headerlink" href="#Module-2,-Practical-10" title="Link to this heading"></a></h1>
+<div class="line-block">
+<div class="line">In this practical we will experiment with <strong>programming paradigms</strong>.</div>
+<div class="line">In particular, we will briefly introduce the <strong>dynamic programming</strong> technique.</div>
+</div>
+<section id="Dynamic-programming">
+<h2>Dynamic programming<a class="headerlink" href="#Dynamic-programming" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">Dynamic programming is a strategy to optimize recursive algorithms.</div>
+<div class="line">Every time we find an algorithm solving a bigger problem by <em>repetitive recursive calls</em> on smaller subproblems, we can optimize it by using <strong>dynamic programming</strong>.</div>
+<div class="line">The key idea is simply to <em>store</em> in a table the solution of the subproblems and obtain the result of these subproblems by performing a table lookup.</div>
+</div>
+<p>Two approaches exist:</p>
+<ol class="arabic simple">
+<li><p><strong>Top-down</strong>: solve the problem by breaking it down in smaller subproblems. If the subproblem has already been solved, then the answer has already been saved somewhere. If it has not already been solved, compute a solution and store it. This method is called <strong>memoization</strong>;</p></li>
+<li><p><strong>Bottom-up</strong>: solve the problem by starting from the most trivial subproblems, going up until the complete problem has been solved. Smaller subproblems are guaranteed to be solved before bigger ones. This method is called <strong>dynamic programming</strong>.</p></li>
+</ol>
+<p>Consider the classic example of the computation of Fibonacci numbers:</p>
+<div class="math notranslate nohighlight">
+\[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, ...\]</div>
+<p>which can be computed by the following recursive formula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F(n)=\left\{
+                \begin{array}{ll}
+                  n &amp; if\ n == 0\ or\ n\ == 1\\
+                  F(n-1)+ F(n-2) &amp; if\ n &gt; 1
+                \end{array}
+              \right.\end{split}\]</div>
+<p>This problem can be solved with the following recursive code:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fib(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span><span class="mi">40</span><span class="p">):</span>
+    <span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fib(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+    <span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fib(0)= 0
+Fib(1)= 1
+Fib(2)= 1
+Fib(3)= 2
+Fib(4)= 3
+Fib(5)= 5
+Fib(6)= 8
+Fib(7)= 13
+Fib(8)= 21
+Fib(9)= 34
+Fib(10)= 55
+Fib(11)= 89
+Fib(12)= 144
+Fib(13)= 233
+Fib(14)= 377
+Fib(15)= 610
+Fib(16)= 987
+Fib(17)= 1597
+Fib(18)= 2584
+Fib(19)= 4181
+
+Fib(35)= 9227465
+It took 5.47s
+
+Fib(36)= 14930352
+It took 8.76s
+
+Fib(37)= 24157817
+It took 12.93s
+
+Fib(38)= 39088169
+It took 21.43s
+
+Fib(39)= 63245986
+It took 33.32s
+</pre></div></div>
+</div>
+<p>Although simple to code, the recursive solution performs some steps multiple times, as shown by the following recursion tree (for example f(3) is computed 5 times):</p>
+<img alt="notebooks/notebooks-to-exclude/images/tree.png" src="notebooks/notebooks-to-exclude/images/tree.png" />
+<p>We can use dynamic programming to avoid computing over and over again the same values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">fib_dp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">fib</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">fib</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">fib</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fib</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">fib</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">fib</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fib(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fib_dp</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span><span class="mi">38</span><span class="p">):</span>
+    <span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fib(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fib_dp</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+    <span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span> <span class="o">-</span> <span class="n">start_t</span><span class="p">))</span>
+
+<span class="c1">#we can even do:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1003</span><span class="p">):</span>
+    <span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fib(</span><span class="si">{}</span><span class="s2">)= </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">fib_dp</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+    <span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span> <span class="o">-</span> <span class="n">start_t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fib(0)= 0
+Fib(1)= 0
+Fib(2)= 1
+Fib(3)= 2
+Fib(4)= 3
+Fib(5)= 5
+Fib(6)= 8
+Fib(7)= 13
+Fib(8)= 21
+Fib(9)= 34
+Fib(10)= 55
+Fib(11)= 89
+Fib(12)= 144
+Fib(13)= 233
+Fib(14)= 377
+Fib(15)= 610
+Fib(16)= 987
+Fib(17)= 1597
+Fib(18)= 2584
+Fib(19)= 4181
+
+Fib(35)= 9227465
+It took 0.00s
+
+Fib(36)= 14930352
+It took 0.00s
+
+Fib(37)= 24157817
+It took 0.00s
+
+Fib(1000)= 43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875
+It took 0.00s
+
+Fib(1001)= 70330367711422815821835254877183549770181269836358732742604905087154537118196933579742249494562611733487750449241765991088186363265450223647106012053374121273867339111198139373125598767690091902245245323403501
+It took 0.00s
+
+Fib(1002)= 113796925398360272257523782552224175572745930353730513145086634176691092536145985470146129334641866902783673042322088625863396052888690096969577173696370562180400527049497109023054114771394568040040412172632376
+It took 0.00s
+</pre></div></div>
+</div>
+<p>In the latter case we accumulated partial results in a list and re-used them when needed. Consider the following code:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">fib_dp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">fib</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">fib</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">fib</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fib</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">fib</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">fib</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+
+<span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15000</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">fib_dp</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+It took 46.38s
+</pre></div></div>
+</div>
+<p>In this case we repeated the computations several times anyway and had to recompute the solution all the time, which is a little bit of a waste of time. If we are not concerned about using more space we could modify the code in such a way to update a list and return the whole list, ready for a next iteration:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">fib_dpV2</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">fibList</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">fibList</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fibList</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fibList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">fibList</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">fibList</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+            <span class="c1"># compute all the fibonacci values required to reach fib(n) and store them in the list...</span>
+            <span class="n">fibList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fibList</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">fibList</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">fibList</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">myFibL</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15001</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">fib_dpV2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">myFibL</span><span class="p">)</span>
+<span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci(15000) : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myFibL</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci 0..20: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myFibL</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fibonacci(15000) : 180356212817232358527136269558393274270479577287959770214783776455882580176808282935116449287253001675278567205597341664270703993136851989859494809191272208168671602010135312495296553662790352582033423080689757992520655785610316941531173588408998619812807392167094455165363355259485592278979388870298110870050912172411703995878726547708126588747557108886477742159519675726841476567233617069303168933729769224839193682942110633367322841686836744207977400786184404283243942571683714924012584054120950619420879245008334171878098209414559267738476048405512373264705915648256421029922854826089454770481653365776765021018110912210918296748113016817314353185049893148191072970004722127877580853512230597663125482412037507790122452840808247238862266940374952733301348535189028427982115508256085629078838285854519748549211253115363900979738960948772589014559911367102564396479380119671836661458473444680552841046388920629103926658110037230386547506816712866616340383491227279709660200771238944743897531289959511150305531873160607872566720751381188951153762201432960669039121243742888978686571778654570582578356003787537920689451735958244288072349086881269456351988300299442324421142440230312335818179554507414851349917896307630882698214864014344956780348499120670367075038565963319741348415248138037342603113034434198363994519415494026021710622105031596662576344941382709460665227123428132640271682951472209368453748754510035741638613590279538796566181871895713339174456728394471357415996934436202565485732749272347348991793493320243181956465786389970599533658454386144770652584880176519203467064567384636418219255416950945755037995377546451320680325530900980211314010182766809827492194845387482751225482662997765661866262382112219008183345652570682633899549560294736097218086788785294700336993482784319083980440026327099112563241621005721911339313568395785607613027063516725870186041444932874242502339316433484868302535616417673857358757000197098734066555060275659441540730179880840068680711039092402469979537402038522869532858210224421954879125281803617171486680299882175622463954938841161683824017764172124148438928242788323301450705633955505182591808014745581257657569980476219657313856171171041106956687416108450931365450698373196534957320986723454445945232416845732305494189207716358085853199984634824143123729540264742981573020172237026058046740201545250287662018382140146169998065636288937211877886621661690578651489040221004254744005525689460483194423394923570500857169107685204978377809144999120496376447004389621794981767672901579794816635242858841182877011991980777649470507584848234893126914722042071134658473351945026030226538176505680011883028482299815999170838410236573499975247752075137709072936793331605370102620992579010729955042839150039536988476316814658001111401786786920802580057225089821741914525126541381743907218686111921778056456742847181643346546263899570276608898254139702386798819800561168979805761661085945938400171610214159378775050985949240013649311708619468421748433514761538254173535727874452760668054213182096783214642043675647412439936425441952983174011449159555969819986536279264099966926245798558475510001
+It took 0.02s
+Fibonacci 0..20: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]
+</pre></div></div>
+</div>
+<section id="Excercise">
+<h3>Excercise<a class="headerlink" href="#Excercise" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Catalan numbers (info <a class="reference external" href="https://en.wikipedia.org/wiki/Catalan_number">here</a>) are defined by the following recurrence equation:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}C(n)=\left\{
+                \begin{array}{ll}
+                  1 &amp; if\ n &lt;=1 \\
+                  \sum_{i=0}^{n-1} C(i) C(n-1 -i)&amp; if\ n &gt; 1
+                \end{array}
+              \right.\end{split}\]</div>
+<p>the first few values are reported below:</p>
+<p><span class="math notranslate nohighlight">\(1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786,\)</span> <span class="math notranslate nohighlight">\(208012, 742900, 2674440, 9694845, 35357670, 129644790,\)</span> <span class="math notranslate nohighlight">\(477638700, 1767263190, 6564120420, 24466267020, 91482563640, ...\)</span></p>
+<ol class="loweralpha simple">
+<li><p>Write a recursive function <code class="docutils literal notranslate"><span class="pre">recCatalan(n)</span></code> to compute the n-th catalan number;</p></li>
+<li><p>Write a dynamic programming function <code class="docutils literal notranslate"><span class="pre">dpCatalan(n)</span></code> to compute the n-th catalan number.</p></li>
+</ol>
+<p>Test your code with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>catN = []
+for i in range(0,15):
+    catN.append(recCatalan(i))
+
+print(&quot;First 15 catalan numbers:&quot;)
+print(catN)
+</pre></div>
+</div>
+<p>Finally, check how long it takes to compute the 20th catalan number with the recursive algorithm and with the dynamic programming one.</p>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex1&#39;);"><p>Show/Hide Solution</p>
+</div><div id="Ex1" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">recCatalan</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cat</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">cat</span> <span class="o">+=</span> <span class="n">recCatalan</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">recCatalan</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cat</span>
+
+<span class="k">def</span> <span class="nf">dpCatalan</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">catNums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">catNums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">catNums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">catNums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">catNums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">catNums</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">catN</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span>
+    <span class="n">catN</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">recCatalan</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 15 catalan numbers:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">catN</span><span class="p">)</span>
+
+<span class="n">catN</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1">#for i in range(0,19):</span>
+<span class="c1">#    catN.append(recCatalan(i))</span>
+<span class="n">catN</span> <span class="o">=</span> <span class="n">recCatalan</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;20th catalan number:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">catN</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+
+
+<span class="n">catN</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 15 catalan numbers (dyn.p):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span>
+    <span class="n">catN</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dpCatalan</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">catN</span><span class="p">)</span>
+<span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+
+<span class="n">catN</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">start_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">catN</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dpCatalan</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="n">end_t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First 30 catalan numbers (dyn.p):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">catN</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">{:.2f}</span><span class="s2">s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_t</span><span class="o">-</span><span class="n">start_t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+First 15 catalan numbers:
+[1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440]
+20th catalan number:
+6564120420
+It took 463.08s
+First 15 catalan numbers (dyn.p):
+[1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440]
+First 30 catalan numbers (dyn.p):
+[1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, 6564120420, 24466267020, 91482563640, 343059613650, 1289904147324, 4861946401452, 18367353072152, 69533550916004, 263747951750360, 1002242216651368]
+It took 0.00s
+</pre></div></div>
+</div>
+<p>Download the complete source file: <a class="reference external" href="programming_paradigms/catalan.py">catalan.py</a></p>
+</div></section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Riccardo Scandino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

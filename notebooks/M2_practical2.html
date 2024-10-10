@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2, Practical 2 &mdash; sciprog-ds-M2-24_25  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            sciprog-ds-M2-24_25
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Module 2, Practical 2</a><ul>
+<li><a class="reference internal" href="#Testing">Testing</a></li>
+<li><a class="reference internal" href="#Unit-testing">Unit testing</a><ul>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Measuring-time">Measuring time</a><ul>
+<li><a class="reference internal" href="#id1">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Measuring-memory">Measuring memory</a><ul>
+<li><a class="reference internal" href="#id2">Exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sciprog-ds-M2-24_25</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module 2, Practical 2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/M2_practical2.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Module-2,-Practical-2">
+<h1>Module 2, Practical 2<a class="headerlink" href="#Module-2,-Practical-2" title="Link to this heading"></a></h1>
+<p>In this practical we will learn how to test a Python program and how to measure its runtime and memory usage (i.e., compexity in time and space).</p>
+<section id="Testing">
+<h2>Testing<a class="headerlink" href="#Testing" title="Link to this heading"></a></h2>
+<p>Testing a software product allows to check whether the written code actually yields the expected results. In particular, testing the execution of code is called <em>dynamic</em> testing.</p>
+<p>In Python, we can use <em>assert</em> to quickly test that functions we have written behave as they should:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>assert(condition)
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">condition</span></code> must be <code class="docutils literal notranslate"><span class="pre">True</span></code> for program execution to continue without errors.</div>
+<div class="line">If it is <code class="docutils literal notranslate"><span class="pre">False</span></code>, an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> exception will be raised.</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sumOfTwo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="c1"># this should return 8</span>
+<span class="n">sumOfTwo</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># check that the function is working properly</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sumOfTwo</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># what happens here?</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sumOfTwo</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 2</span> line <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=7&#39;&gt;8&lt;/a&gt;</span> assert(sumOfTwo(3,5) == 8)
+<span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=9&#39;&gt;10&lt;/a&gt;</span> # what happens here?
+<span class="ansi-green-fg">---&gt; &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W1sZmlsZQ%3D%3D?line=10&#39;&gt;11&lt;/a&gt;</span> assert(sumOfTwo(3,5) == 1)
+
+<span class="ansi-red-fg">AssertionError</span>:
+</pre></div></div>
+</div>
+<div class="line-block">
+<div class="line">Always remember that these tests are not exhaustive, they check only specific aspects of the function and a subset of possible inputs.</div>
+<div class="line">For example, <em>what happens if the user provides one integer and one string as parameters?</em></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sumOfTwo</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;baduser&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 4</span> line <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> sumOfTwo(3, &#34;baduser&#34;)
+
+<span class="ansi-green-intense-fg ansi-bold">/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb Cell 4</span> line <span class="ansi-cyan-fg">2
+</span><span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> def sumOfTwo(x, y):
+<span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/home/davidebrex/Documents/ESERCITAZIONI/sciprog-ds-M2-23_24/M2_practical2.ipynb#W3sZmlsZQ%3D%3D?line=1&#39;&gt;2&lt;/a&gt;</span>     return x + y
+
+<span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Unit-testing">
+<h2>Unit testing<a class="headerlink" href="#Unit-testing" title="Link to this heading"></a></h2>
+<p>Unit testing refers to tests that verify the functionality of a code unit, typically a function. Asserts are a quick way to test a piece of code but they don’t provide us with much detail (e.g. how different is the result we obtained from the expected one?). Luckily, Python provides us with a specific module for unit testing: <em>unittest</em>.</p>
+<p><em>unittest</em> is an OOP-based module - you need to subclass the <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code> class:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci(5):&quot;</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">FibonacciTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_listLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fibonacci(5): [1, 1, 2, 3, 5]
+</pre></div></div>
+</div>
+<p>The test methods name begins with <code class="docutils literal notranslate"><span class="pre">test_</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">unittest</span></code> offers many types of assertions: <code class="docutils literal notranslate"><span class="pre">assertTrue</span></code>, <code class="docutils literal notranslate"><span class="pre">assertEqual</span></code>, <code class="docutils literal notranslate"><span class="pre">assertListEquals</span></code> and more.</p>
+<p>In a command-line environment, the unit test woud be launched by typing: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">unittest</span> <span class="pre">file_test</span></code></p>
+<p><em>Optional, not needed here:</em> If you are in a notebook, we need to invoke the module explicitly: <code class="docutils literal notranslate"><span class="pre">unittest.main(argv=[''],</span> <span class="pre">verbosity=2,</span> <span class="pre">exit=False)</span></code></p>
+<p><strong>Example</strong></p>
+<p>Try yourself to complete the <code class="docutils literal notranslate"><span class="pre">FibonacciTest</span></code> class by adding the following asserts:</p>
+<ol class="arabic simple">
+<li><p>check that the last (highest) number is correct</p></li>
+<li><p>check that a negative <code class="docutils literal notranslate"><span class="pre">n</span></code> provided as input does not break the function</p></li>
+<li><p>check that a floating point <code class="docutils literal notranslate"><span class="pre">n</span></code> as input does not break the function</p></li>
+</ol>
+<div class="tggle" onclick="toggleVisibility(&#39;example1&#39;);"><p>Show/Hide Solution</p>
+</div><div id="example1" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci(5):&quot;</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">FibonacciTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_listLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># fibonacci(4)) returns 4 numbers</span>
+
+    <span class="k">def</span> <span class="nf">test_checkLast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># last number of fibonacci(5)) is 5</span>
+
+    <span class="k">def</span> <span class="nf">test_checkNegative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># fibonacci(-10) returns something</span>
+
+    <span class="k">def</span> <span class="nf">test_checkFloatingPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mf">4.5</span><span class="p">))</span> <span class="c1"># what happens here?</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fibonacci(5): [1, 1, 2, 3, 5]
+</pre></div></div>
+</div>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">checkFloatingPoint</span></code> test fails. Let’s fix the <code class="docutils literal notranslate"><span class="pre">fibonacci</span></code> function to solve the issue and run the unit tests again!</p>
+<p>What if we decide to <em>not</em> accept a floating point input? We can raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> exception and modify the unit test accordingly.</p>
+<p>For a preliminary guide to Python exceptions, please refer to the official Python tutorial: <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">https://docs.python.org/3/tutorial/errors.html</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span> <span class="c1"># we raise an exception!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci(5):&quot;</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">FibonacciTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_listLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># fibonacci(4)) returns 4 numbers</span>
+
+    <span class="k">def</span> <span class="nf">test_checkLast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># last number of fibonacci(5)) is 5</span>
+
+    <span class="k">def</span> <span class="nf">test_checkNegative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># fibonacci(-10) returns something</span>
+
+    <span class="k">def</span> <span class="nf">test_checkFloatingPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span> <span class="c1"># fibonacci(4.5) has to raise an exception</span>
+            <span class="n">fibonacci</span><span class="p">(</span><span class="mf">4.5</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fibonacci(5): [1, 1, 2, 3, 5]
+</pre></div></div>
+</div>
+<section id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Link to this heading"></a></h3>
+<p>Modify the <code class="docutils literal notranslate"><span class="pre">FibonacciTest</span></code> class to:</p>
+<ol class="arabic simple">
+<li><p>raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception if the provided <code class="docutils literal notranslate"><span class="pre">n</span></code> is negative</p></li>
+<li><p>check that a big <code class="docutils literal notranslate"><span class="pre">n</span></code> (&gt;&gt;100, for example 100,000) does not raise a <code class="docutils literal notranslate"><span class="pre">MemoryError</span></code> exception</p></li>
+</ol>
+<div class="tggle" onclick="toggleVisibility(&#39;ex1&#39;);"><p>Show/Hide Solution</p>
+</div><div id="ex1" style="display:none;"><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="c1"># we raise an exception!</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span> <span class="c1"># we raise another exception!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fibonacci(5):&quot;</span><span class="p">,</span> <span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">FibonacciTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_listLength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># fibonacci(4)) returns 4 numbers</span>
+
+    <span class="k">def</span> <span class="nf">test_checkLast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">5</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># last number of fibonacci(5)) is 5</span>
+
+    <span class="k">def</span> <span class="nf">test_checkNegative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">fibonacci</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># fibonacci(-10) has to raise an exception this time...</span>
+
+    <span class="k">def</span> <span class="nf">test_checkFloatingPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">):</span> <span class="c1"># fibonacci(4.5) has to raise an exception</span>
+            <span class="n">fibonacci</span><span class="p">(</span><span class="mf">4.5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_checkBig</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span> <span class="c1"># test fibonacci(100000) for memory issues</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fibonacci(5): [1, 1, 2, 3, 5]
+</pre></div></div>
+</div>
+</div></section>
+</section>
+<section id="Measuring-time">
+<h2>Measuring time<a class="headerlink" href="#Measuring-time" title="Link to this heading"></a></h2>
+<p>Another aspect of testing is to probe the time and memory required by your algorithms to be executed under different inputs and parameters.</p>
+<div class="line-block">
+<div class="line">Python provides the <code class="docutils literal notranslate"><span class="pre">timeit</span></code> package to measure the execution time of small snippets of code.</div>
+<div class="line">Execution of the snippet is repeated multiple times (<code class="docutils literal notranslate"><span class="pre">number</span></code> parameter) to allow obtaining an estimate also for the quickest snippets :</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span>
+
+<span class="c1"># setup ensures that timeit can access specific functions from your local environment</span>
+<span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;fibonacci(5)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import fibonacci&quot;</span><span class="p">)</span>
+
+<span class="n">times</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;fibonacci(5)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import fibonacci&quot;</span><span class="p">))</span>
+<span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;fibonacci(10)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import fibonacci&quot;</span><span class="p">))</span>
+<span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;fibonacci(15)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import fibonacci&quot;</span><span class="p">))</span>
+
+<span class="n">timeSeries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="n">timeSeries</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="c1"># to change x labels...</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;fibonacci(5)&#39;</span><span class="p">,</span> <span class="s1">&#39;fibonacci(10)&#39;</span><span class="p">,</span> <span class="s1">&#39;fibonacci(15)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_M2_practical2_15_0.png" src="../_images/notebooks_M2_practical2_15_0.png" />
+</div>
+</div>
+<img alt="fibonacciTimes" src="notebooks/images/fibonacciTimes.png" />
+<section id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Write the <code class="docutils literal notranslate"><span class="pre">recursiveFibonacci</span></code> function that computes the n-th Fibonacci number recursively.</div>
+<div class="line">Test the execution times of the two fibonacci functions with <code class="docutils literal notranslate"><span class="pre">n</span></code> ranging from 1 to 20 and plot the two distributions</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;ex2&#39;);"><p>Show/Hide Solution</p>
+</div><div id="ex2" style="display:none;"><div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">timeit</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">recursiveFibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">recursiveFibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">recursiveFibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">timesIterative</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">timesIterative</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;fibonacci(+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import fibonacci&quot;</span><span class="p">))</span>
+
+<span class="n">timesRecursive</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">timesRecursive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">timeit</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="s1">&#39;recursiveFibonacci(+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">setup</span><span class="o">=</span><span class="s2">&quot;from __main__ import recursiveFibonacci&quot;</span><span class="p">))</span>
+
+<span class="n">timesDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;iterative&#39;</span><span class="p">:</span> <span class="n">timesIterative</span><span class="p">,</span> <span class="s1">&#39;recursive&#39;</span><span class="p">:</span> <span class="n">timesRecursive</span><span class="p">}</span>
+<span class="n">timesDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">timesDict</span><span class="p">)</span>
+<span class="n">timesDf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># plot times in logarithmic scale to highlight differences</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<img alt="fibonacciTimesRec" src="notebooks/images/fibonacciTimesRec.png" />
+</div></section>
+</section>
+<section id="Measuring-memory">
+<h2>Measuring memory<a class="headerlink" href="#Measuring-memory" title="Link to this heading"></a></h2>
+<p>Memory used by an object, function or full Python scripts can be measured by different means.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sys.getsizeof</span></code> method is one of them:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">200</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">400</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">l1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">l2</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1656
+3256
+</pre></div></div>
+</div>
+<div class="line-block">
+<div class="line">However, measuring the memory footprint of a whole function (rather than single objects), would be much more useful.</div>
+<div class="line">We can achieve that, for instance, with the <code class="docutils literal notranslate"><span class="pre">memory-profiler</span></code> package.</div>
+</div>
+<p>You can install it with pip: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span> <span class="pre">memory_profiler</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save this file as memProfSample.py</span>
+
+<span class="kn">from</span> <span class="nn">memory_profiler</span> <span class="kn">import</span> <span class="n">profile</span>
+
+<span class="nd">@profile</span>
+<span class="k">def</span> <span class="nf">allocatingFunction</span><span class="p">():</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">allocatingFunction</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="n">memProfSample</span><span class="o">.</span><span class="n">py</span>
+
+<span class="n">Line</span> <span class="c1">#    Mem usage    Increment  Occurences   Line Contents</span>
+<span class="o">============================================================</span>
+     <span class="mi">5</span>     <span class="mf">39.9</span> <span class="n">MiB</span>     <span class="mf">39.9</span> <span class="n">MiB</span>           <span class="mi">1</span>   <span class="nd">@profile</span>
+     <span class="mi">6</span>                                         <span class="k">def</span> <span class="nf">allocatingFunction</span><span class="p">():</span>
+     <span class="mi">7</span>     <span class="mf">47.5</span> <span class="n">MiB</span>      <span class="mf">7.6</span> <span class="n">MiB</span>           <span class="mi">1</span>       <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+     <span class="mi">8</span>    <span class="mf">200.1</span> <span class="n">MiB</span>    <span class="mf">152.6</span> <span class="n">MiB</span>           <span class="mi">1</span>       <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">7</span><span class="p">)</span>
+     <span class="mi">9</span>     <span class="mf">47.5</span> <span class="n">MiB</span>   <span class="o">-</span><span class="mf">152.6</span> <span class="n">MiB</span>           <span class="mi">1</span>       <span class="k">del</span> <span class="n">b</span>
+    <span class="mi">10</span>     <span class="mf">47.5</span> <span class="n">MiB</span>      <span class="mf">0.0</span> <span class="n">MiB</span>           <span class="mi">1</span>       <span class="k">return</span> <span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<section id="id2">
+<h3>Exercise<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>Test the functionalities introduced in this practical to analyze some of the programs developed during the past lessons.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Riccardo Scandino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

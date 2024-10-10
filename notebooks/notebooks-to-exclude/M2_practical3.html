@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2, Practical 3 &mdash; sciprog-ds-M2-24_25  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            sciprog-ds-M2-24_25
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">     Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../M2_practical1.html">     Module 2, Practical 1</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sciprog-ds-M2-24_25</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module 2, Practical 3</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/notebooks/notebooks-to-exclude/M2_practical3.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Module-2,-Practical-3">
+<h1>Module 2, Practical 3<a class="headerlink" href="#Module-2,-Practical-3" title="Link to this heading"></a></h1>
+<p>In this practical we will start working with algorithm complexity through practical examples.</p>
+<section id="Complexity">
+<h2>Complexity<a class="headerlink" href="#Complexity" title="Link to this heading"></a></h2>
+<p>The <em>complexity</em> of an algorithm can be defined as a function mapping the size of the input to the time required to get the result. This is also called the <em>cost function</em>.</p>
+<p>There exist several asymptotic (time-measuring) notations. Informally they are:</p>
+<ul class="simple">
+<li><p>Big Omega (best case)</p></li>
+<li><p>Big Theta (average case)</p></li>
+<li><p>Big O (worst case)</p></li>
+</ul>
+<p>The upper-bound complexity <em>O</em> (the <em>big-Oh</em>) is generally the most interesting to analyze. In this practical we will work with this notation considering several Python code samples.</p>
+<p>Big O is a formal notation that describes the behaviour of a function when the argument tends towards the maximum input. Big O takes the upper bound, that is, it considers the worst-case results, the worst execution of the algorithm.</p>
+<p>Instead of saying the input is 10 billion, or infinite, we say the input is <code class="docutils literal notranslate"><span class="pre">n</span></code> size. The exact size of the input doesn’t matter, we only care of how our algorithm performs with the worst input. This approach allows to still work with Big O even if we do not know the exact size of the input during the code execution.</p>
+<p>Big O is easy to read once we learn the different order of growth:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">inputList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+
+<span class="n">linear</span>  <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">]</span>
+<span class="n">logn</span>  <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">]</span>
+<span class="n">quadratic</span>  <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">]</span>
+<span class="n">cubic</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">]</span>
+<span class="n">exponential</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">]</span>
+
+<span class="n">functDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;linear&#39;</span><span class="p">:</span> <span class="n">linear</span><span class="p">,</span> <span class="s2">&quot;logn&quot;</span><span class="p">:</span> <span class="n">logn</span><span class="p">,</span> <span class="s2">&quot;quadratic&quot;</span><span class="p">:</span> <span class="n">quadratic</span><span class="p">,</span> <span class="s2">&quot;cubic&quot;</span><span class="p">:</span> <span class="n">cubic</span><span class="p">,</span> <span class="s2">&quot;exp&quot;</span><span class="p">:</span> <span class="n">exponential</span><span class="p">}</span>
+<span class="n">functDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">functDict</span><span class="p">)</span>
+<span class="n">functDf</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="n">functDf</span><span class="p">[[</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;logn&quot;</span><span class="p">,</span> <span class="s2">&quot;quadratic&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;zoomed in&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_notebooks-to-exclude_M2_practical3_1_0.png" src="../../_images/notebooks_notebooks-to-exclude_M2_practical3_1_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_notebooks-to-exclude_M2_practical3_1_1.png" src="../../_images/notebooks_notebooks-to-exclude_M2_practical3_1_1.png" />
+</div>
+</div>
+<section id="Python-built-in-data-structures-and-relative-methods-have-different-time-complexity.-A-comprehensive-list-is-available-at-this-link">
+<h3>Python built-in data structures and relative methods have different time complexity. A comprehensive list is available at this <a class="reference external" href="https://wiki.python.org/moin/TimeComplexity">link</a><a class="headerlink" href="#Python-built-in-data-structures-and-relative-methods-have-different-time-complexity.-A-comprehensive-list-is-available-at-this-link" title="Link to this heading"></a></h3>
+<p><strong>Example 1</strong></p>
+<p>Determine the complexity of these two functions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">printList</span><span class="p">(</span><span class="n">inputList</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="n">printList</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---------------------&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">printListBothDirections</span><span class="p">(</span><span class="n">inputList</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forward:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reverse:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inputList</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="n">printListBothDirections</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4
+5
+6
+8
+---------------------
+Forward:
+4
+5
+6
+8
+Reverse:
+8
+6
+5
+4
+</pre></div></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Example1&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Example1" style="display:none;"><p>Both <code class="docutils literal notranslate"><span class="pre">printList</span></code> and <code class="docutils literal notranslate"><span class="pre">printListBothDirections</span></code> are <code class="docutils literal notranslate"><span class="pre">O(n)</span></code>, so their complexity is linear with respect to the processed list lenght.
+To be precise, <code class="docutils literal notranslate"><span class="pre">printListBothDirections</span></code> is <code class="docutils literal notranslate"><span class="pre">O(n+n)</span> <span class="pre">=</span> <span class="pre">O(2n)</span></code>, but since we’re looking towards infinite-size inputs, the double of infinite is still infinite.</p>
+</div><p><strong>Example 2</strong></p>
+<p>Determine the complexity of a function that computes the highest value for each pair of values from two input lists <code class="docutils literal notranslate"><span class="pre">l1</span></code> and <code class="docutils literal notranslate"><span class="pre">l2</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computeHighest</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="n">l1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="n">l2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i1</span> <span class="o">&gt;</span> <span class="n">i2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value </span><span class="si">{}</span><span class="s2"> in l1 greater than value </span><span class="si">{}</span><span class="s2"> in l2&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">))</span>
+
+<span class="n">computeHighest</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">11</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Value 4 in l1 greater than value 1 in l2
+Value 5 in l1 greater than value 1 in l2
+Value 6 in l1 greater than value 1 in l2
+Value 8 in l1 greater than value 1 in l2
+</pre></div></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Example2&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Example2" style="display:none;"><p>The function is quadratic, <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code>, as we do n iterations (one per each element in l1) times n iterations (one per each element in l2).</p>
+</div><p><strong>Example 3</strong></p>
+<p>Determine the complexity of the following functions, performing multiple tasks.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myFunction</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> seconds left&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;boom!</span><span class="se">\n</span><span class="s2">--------------&quot;</span><span class="p">)</span>
+
+    <span class="n">itemsString</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">itemsString</span> <span class="o">+=</span> <span class="s2">&quot;&gt;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">itemsString</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------&quot;</span><span class="p">)</span>
+
+    <span class="n">pairwiseProducts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item1</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item2</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">item1</span> <span class="o">==</span> <span class="n">item2</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I&#39;m in the diagonal </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item1</span><span class="p">,</span> <span class="n">item2</span><span class="p">))</span>
+            <span class="n">pairwiseProducts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item1</span><span class="o">*</span><span class="n">item2</span><span class="p">)</span>
+
+<span class="n">myFunction</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4 seconds left
+3 seconds left
+2 seconds left
+1 seconds left
+boom!
+--------------
+4&gt;5&gt;6&gt;8&gt;12&gt;14
+--------------
+I&#39;m in the diagonal 4 4
+I&#39;m in the diagonal 5 5
+I&#39;m in the diagonal 6 6
+I&#39;m in the diagonal 8 8
+I&#39;m in the diagonal 12 12
+I&#39;m in the diagonal 14 14
+</pre></div></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Example3&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Example3" style="display:none;"><p>The complexity of this function can be determined by breaking it down in its different parts:</p>
+<ul class="simple">
+<li><p>the first loop does 4 iterations, regardless of the input. It is constant, so <code class="docutils literal notranslate"><span class="pre">O(4)</span></code>.</p></li>
+<li><p>the second loop does n iterations, where n is the size of the input. It is linear, so <code class="docutils literal notranslate"><span class="pre">O(n)</span></code>.</p></li>
+<li><p>the last loop does n*n iterations, where n is the size of the input. It is quadratic, so <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code>.</p></li>
+</ul>
+<p>Therefore, by summing <code class="docutils literal notranslate"><span class="pre">O(5)</span> <span class="pre">+</span> <span class="pre">O(n)</span> <span class="pre">+</span> <span class="pre">O(n^2)</span></code> we can say that the function is <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code>, which “dominates” the other terms.</p>
+</div><p><strong>Example 4</strong></p>
+<p>Determine the complexity of the <code class="docutils literal notranslate"><span class="pre">listHalver</span></code> function that returns every division by 2 of the <code class="docutils literal notranslate"><span class="pre">inputList</span></code> parameter until it’s empty, and the <code class="docutils literal notranslate"><span class="pre">sliceStepper</span></code> function that uses <code class="docutils literal notranslate"><span class="pre">listHalver</span></code> function with lists of length <code class="docutils literal notranslate"><span class="pre">n...1</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">listHalver</span><span class="p">(</span><span class="n">inputList</span><span class="p">):</span>
+    <span class="n">sliced</span> <span class="o">=</span> <span class="n">inputList</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">sliced</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">sliced</span> <span class="o">=</span> <span class="n">sliced</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sliced</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sliced</span><span class="p">)</span>
+
+<span class="n">listHalver</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">halverStepper</span><span class="p">(</span><span class="n">maxListLength</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxListLength</span><span class="p">)):</span>
+        <span class="n">listHalver</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">)))</span>
+
+<span class="n">halverStepper</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[1, 2, 3, 4]
+[1, 2]
+[1]
+------------
+[1, 2, 3, 4, 5]
+[1, 2]
+[1]
+[1, 2, 3, 4]
+[1, 2]
+[1]
+[1, 2, 3, 4]
+[1, 2]
+[1]
+[1, 2, 3]
+[1]
+[1, 2, 3]
+[1]
+[1, 2]
+[1]
+[1, 2]
+[1]
+[1]
+[1]
+</pre></div></div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Example4&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Example4" style="display:none;"><p>The <code class="docutils literal notranslate"><span class="pre">listHalver</span></code> function needs to look at a smaller subset of the data at every step, and is therefore logarithmic, <code class="docutils literal notranslate"><span class="pre">O(log(n))</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">halverStepper</span></code> function does <code class="docutils literal notranslate"><span class="pre">n</span></code> times an <code class="docutils literal notranslate"><span class="pre">O(log(n))</span></code> operation (<code class="docutils literal notranslate"><span class="pre">listHalver</span></code>), and is therefore <code class="docutils literal notranslate"><span class="pre">O(nlog(n))</span></code>.</p>
+</div></section>
+</section>
+<section id="Exercises">
+<h2>Exercises<a class="headerlink" href="#Exercises" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Let <code class="docutils literal notranslate"><span class="pre">M</span></code> be a square matrix - a list containing <code class="docutils literal notranslate"><span class="pre">n</span></code> lists, each of them of size <code class="docutils literal notranslate"><span class="pre">n</span></code>. Return the computational complexity of function <code class="docutils literal notranslate"><span class="pre">fun()</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">n</span></code>:</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">element</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex1&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Ex1" style="display:none;"><p><code class="docutils literal notranslate"><span class="pre">O(n^3)</span></code>, because the complexity is <code class="docutils literal notranslate"><span class="pre">n</span></code> for the list comprehension, times <code class="docutils literal notranslate"><span class="pre">n</span></code> for the inner <code class="docutils literal notranslate"><span class="pre">for</span></code> cycle, times <code class="docutils literal notranslate"><span class="pre">n</span></code> for the outer <code class="docutils literal notranslate"><span class="pre">for</span></code> cycle</p>
+</div><ol class="arabic simple" start="2">
+<li><p>Given a list <code class="docutils literal notranslate"><span class="pre">L</span></code> of <code class="docutils literal notranslate"><span class="pre">n</span></code> elements, please compute the asymptotic computational complexity of the following function, explaining your reasoning.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_fun</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)):</span>
+        <span class="n">tmp</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">L</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex2&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Ex2" style="display:none;"><p>It mainly depends on the implementation of the list (we will see in the following practicals what this means). One possbile answer could be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">len(L)</span></code> has a constant complexity <code class="docutils literal notranslate"><span class="pre">O(1)</span></code></p></li>
+<li><p>the for loop costs <code class="docutils literal notranslate"><span class="pre">n</span></code> times the head insertion in the list <code class="docutils literal notranslate"><span class="pre">tmp</span></code>, if this requires a shift right of all the previously inserted elements, this could be in total <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code></p></li>
+<li><p>the final sum costs <code class="docutils literal notranslate"><span class="pre">O(n)</span></code></p></li>
+</ul>
+<p>This makes a quadratic overall asymptotic complexity.</p>
+</div><ol class="arabic simple" start="3">
+<li><p>Given a sorted list <code class="docutils literal notranslate"><span class="pre">alist</span></code> of <code class="docutils literal notranslate"><span class="pre">n</span></code> elements, please compute the asymptotic computational complexity of the following function implementing binary search, explaining your reasoning.</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="n">alist</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alist</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">while</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="n">last</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+        <span class="n">midpoint</span> <span class="o">=</span> <span class="p">(</span><span class="n">first</span> <span class="o">+</span> <span class="n">last</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="k">if</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+            <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&lt;</span> <span class="n">alist</span><span class="p">[</span><span class="n">midpoint</span><span class="p">]:</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="n">midpoint</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">midpoint</span><span class="o">+</span><span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">found</span>
+</pre></div>
+</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex3&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Ex3" style="display:none;"><p>The binary search divides by two the lenght of the list at each iteration, this maks the asymptotic complexity to be <code class="docutils literal notranslate"><span class="pre">0(log(n))</span></code>.</p>
+</div><ol class="arabic simple" start="4">
+<li><p>Please compute the asymptotic computational complexity of the following code, that computes the Fibonacci sequence according to the following formula:</p></li>
+</ol>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">n</span></code> is even, then <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">n/2</span></code> and <code class="docutils literal notranslate"><span class="pre">F(n)</span> <span class="pre">=</span> <span class="pre">[2*F(k-1)</span> <span class="pre">+</span> <span class="pre">F(k)]*F(k)</span></code></p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">n</span></code> is odd, then <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)/2</span></code> and <code class="docutils literal notranslate"><span class="pre">F(n)</span> <span class="pre">=</span> <span class="pre">F(k)*F(k)</span> <span class="pre">+</span> <span class="pre">F(k-1)*F(k-1)</span></code>.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an array of length n for memoization (we will see later what memoization is...)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+<span class="c1"># Returns n&#39;th fibonacci number using table f[]</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">:</span>
+    <span class="c1"># Base cases</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+
+    <span class="c1"># If fib(n) is already computed (thanks to memoization)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="c1"># Applying above formula [Note value n&amp;1 is 1</span>
+    <span class="c1"># if n is odd, else 0.</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="c1"># (n &amp; 1) is 1 when n is odd, 0 otherwise</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">*</span><span class="n">fib</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+
+<span class="c1"># main code</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="c1"># avoids to add a new line at each iteration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1"># to go to new line at the end</span>
+</pre></div>
+</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex4&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Ex4" style="display:none;"><p>Thanks to memoization, the access to the already computed Fibonacci numbers has constant complexity (<code class="docutils literal notranslate"><span class="pre">O(1)</span></code>). This makes the asymptotic complexity of the function <code class="docutils literal notranslate"><span class="pre">fib</span></code> to be logarithmic (<code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">(n))</span></code>). The function <code class="docutils literal notranslate"><span class="pre">fib</span></code> is then called <code class="docutils literal notranslate"><span class="pre">n</span></code> times. This makes the overall complexity to be <code class="docutils literal notranslate"><span class="pre">O(n</span> <span class="pre">log(n))</span></code>.</p>
+</div><ol class="arabic simple" start="5">
+<li><p>Please compute the asymptotic computational complexity of the function <code class="docutils literal notranslate"><span class="pre">subsets</span></code>, that computes all the subsets of a set of elements.</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Subsets of {a,b}: {(), (&#39;b&#39;,), (&#39;a&#39;,), (&#39;b&#39;, &#39;a&#39;)}
+Subsets of {a,b,c}: {(), (&#39;b&#39;,), (&#39;a&#39;,), (&#39;c&#39;,), (&#39;b&#39;, &#39;a&#39;), (&#39;b&#39;, &#39;c&#39;), (&#39;a&#39;, &#39;c&#39;), (&#39;b&#39;, &#39;a&#39;, &#39;c&#39;)}
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">combinations</span>
+
+<span class="k">def</span> <span class="nf">subsets</span><span class="p">(</span><span class="n">elementSet</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">elementSet</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elementSet</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Subsets of {a,b}:&#39;</span><span class="p">,</span> <span class="n">subsets</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Subsets of {a,b,c}:&#39;</span><span class="p">,</span> <span class="n">subsets</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="tggle" onclick="toggleVisibility(&#39;Ex5&#39;);"><p>Show/Hide Complexity</p>
+</div><div id="Ex5" style="display:none;"><p>What’s important to notice here is that the number of subsets grows <strong>exponentially</strong> with the number <code class="docutils literal notranslate"><span class="pre">n</span></code> of the elements on the original set. This makes the overall complexity to be exponential <code class="docutils literal notranslate"><span class="pre">O(2^n)</span></code>.</p>
+</div></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Riccardo Scandino.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
