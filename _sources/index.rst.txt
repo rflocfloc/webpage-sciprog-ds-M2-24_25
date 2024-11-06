@@ -14,4 +14,3 @@ Email: riccardo.scandino@unitn.it
    :caption: Contents:
 
         Home <notebooks/index.ipynb>
-        Module 2, Practical 1 <notebooks/M2_practical1.ipynb>
