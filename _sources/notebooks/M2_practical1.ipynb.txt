@@ -108,7 +108,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 2,
    "metadata": {},
    "outputs": [
     {
@@ -117,7 +117,7 @@
      "text": [
       "<class '__main__.Rectangle'>\n",
       "<class '__main__.Rectangle'>\n",
-      "R == R1? False id R:140461848354768 id R1:140461848353232\n",
+      "R == R1? False id R:140436373140688 id R1:140436373142480\n",
       "\n",
       "R:\n",
       "Length: 5 Width: 10\n",
@@ -205,7 +205,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [
     {
@@ -215,7 +215,7 @@
      "traceback": [
       "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
       "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
-      "\u001b[0;32m/tmp/ipykernel_59974/2984036234.py\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     20\u001b[0m \u001b[0md\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mR\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdiagonal\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0;31m#we might be tempted to access the encapsulated values:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 22\u001b[0;31m print(\"\\nR:\\nLength: {} Width: {}\\nPerimeter: {}\\nArea:{}\".format(R.__length,\n\u001b[0m\u001b[1;32m     23\u001b[0m                                                                   \u001b[0mR\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__width\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     24\u001b[0m                                                                   \u001b[0mp\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "Cell \u001b[0;32mIn[3], line 22\u001b[0m\n\u001b[1;32m     20\u001b[0m d \u001b[38;5;241m=\u001b[39m R\u001b[38;5;241m.\u001b[39mdiagonal()\n\u001b[1;32m     21\u001b[0m \u001b[38;5;66;03m#we might be tempted to access the encapsulated values:\u001b[39;00m\n\u001b[0;32m---> 22\u001b[0m \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mR:\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mLength: \u001b[39m\u001b[38;5;132;01m{}\u001b[39;00m\u001b[38;5;124m Width: \u001b[39m\u001b[38;5;132;01m{}\u001b[39;00m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mPerimeter: \u001b[39m\u001b[38;5;132;01m{}\u001b[39;00m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mArea:\u001b[39m\u001b[38;5;132;01m{}\u001b[39;00m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;241m.\u001b[39mformat(R\u001b[38;5;241m.\u001b[39m__length,\n\u001b[1;32m     23\u001b[0m                                                                   R\u001b[38;5;241m.\u001b[39m__width,\n\u001b[1;32m     24\u001b[0m                                                                   p,\n\u001b[1;32m     25\u001b[0m                                                                   a))\n",
       "\u001b[0;31mAttributeError\u001b[0m: 'Rectangle' object has no attribute '__length'"
      ]
     }
@@ -267,7 +267,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [
     {
@@ -327,7 +327,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 5,
    "metadata": {},
    "outputs": [
     {
@@ -408,9 +408,34 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 6,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Base: 10\n",
+      "Values:(1, 2, 3)\n",
+      "123 = 1*100 + 2*10 + 3*1\n",
+      "\n",
+      "Base: 4\n",
+      "Values:(1, 2, 3)\n",
+      "27 = 1*16 + 2*4 + 3*1\n",
+      "\n",
+      "mn+mn2:150\n",
+      "\n",
+      "\n",
+      "Error.Values must be lower than base\n",
+      "Can't create n. with base 3 and values (7, 1, 1)\n",
+      "\n",
+      "\n",
+      "123 < 27? False\n",
+      "123 == 27? False\n",
+      "123 > 27? True\n"
+     ]
+    }
+   ],
    "source": [
     "class MyNumber:\n",
     "    \n",
@@ -494,9 +519,22 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 7,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Jade Smith is aged 5\n",
+      "Dan Smith is aged 45\n",
+      " - Dan's child is Jade Smith\n",
+      " - Dan's child is John Smith\n",
+      " - Dan's child is Tim Smith\n",
+      "\n"
+     ]
+    }
+   ],
    "source": [
     "class Person:\n",
     "    \n",
@@ -551,9 +589,22 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 8,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Jade Smith is aged 5\n",
+      "Dan Smith is aged 45\n",
+      " - Dan's child is Jade Smith\n",
+      " - Dan's child is John Smith\n",
+      " - Dan's child is Tim Smith\n",
+      "\n"
+     ]
+    }
+   ],
    "source": [
     "class Person:\n",
     "    \n",
@@ -623,7 +674,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 23,
+   "execution_count": 9,
    "metadata": {},
    "outputs": [
     {
@@ -631,10 +682,10 @@
      "output_type": "stream",
      "text": [
       "I am a polygon\n",
-      "I am a rectangle with id: 140461848406096. \n",
+      "I am a rectangle with id: 140436237036112. \n",
       "4\n",
       "8\n",
-      "I am a triangle with id: 140461848405376. \n",
+      "I am a triangle with id: 140436237125072. \n",
       "3\n",
       "12\n"
      ]
@@ -727,9 +778,31 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 10,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'map'>\n",
+      "27.50°F --> -2.50°C\n",
+      "29.00°F --> -1.67°C\n",
+      "37.50°F --> 3.06°C\n",
+      "12.00°F --> -11.11°C\n",
+      "44.00°F --> 6.67°C\n",
+      "72.00°F --> 22.22°C\n",
+      "100.00°F --> 37.78°C\n",
+      "\n",
+      "\n",
+      "Freezing temperatures:\n",
+      "<class 'filter'>\n",
+      "27.50°F --> -2.50°C\n",
+      "29.00°F --> -1.67°C\n",
+      "12.00°F --> -11.11°C\n"
+     ]
+    }
+   ],
    "source": [
     "def fahrenheit(T):\n",
     "    return ((float(9)/5)*T + 32)\n",
@@ -774,9 +847,17 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 11,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "22\n"
+     ]
+    }
+   ],
    "source": [
     "from functools import reduce\n",
     "\n",
@@ -788,11 +869,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 12,
    "metadata": {
     "scrolled": true
    },
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Word sizes: [7, 5, 3, 9, 3, 3, 7, 2, 4]\n",
+      "Dijkstra's quote has 43 characters\n"
+     ]
+    }
+   ],
    "source": [
     "from functools import reduce\n",
     "\n",
@@ -825,9 +915,26 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 13,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "30\n",
+      "Hi there!\n",
+      "\n",
+      "\n",
+      "200\n",
+      "Hi! Hi! Hi! \n",
+      "\n",
+      "\n",
+      "Hi there from luca!\n",
+      "Hi There From Luca!\n"
+     ]
+    }
+   ],
    "source": [
     "sum_lambda = lambda x, y : x+y\n",
     "mult_lambda = lambda x,y : x*y\n",
@@ -856,7 +963,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [
     {
@@ -864,10 +971,8 @@
      "output_type": "stream",
      "text": [
       "[('t', 5), ('e', 8), ('s', 6), ('i', 1), ('n', 4), ('g', 2), ('h', 3), ('o', 3), ('w', 1), ('p', 1), ('r', 1), ('c', 2), ('a', 1), ('b', 2), ('f', 1), ('u', 1)]\n",
-      "[('i', 1), ('w', 1), ('p', 1), ('r', 1), ('a', 1), ('f', 1), ('u', 1), ('g', 2), ('c', 2), ('b', 2), ('h', 3), ('o', 3), ('n', 4), ('t', 5), ('s', 6), ('e', 8)]\n",
       "All least frequent: [('i', 1), ('w', 1), ('p', 1), ('r', 1), ('a', 1), ('f', 1), ('u', 1)]\n",
       "All most frequent: [('e', 8)]\n",
-      "[('a', 1), ('b', 2), ('c', 2), ('e', 8), ('f', 1), ('g', 2), ('h', 3), ('i', 1), ('n', 4), ('o', 3), ('p', 1), ('r', 1), ('s', 6), ('t', 5), ('u', 1), ('w', 1)]\n",
       "The first in alphabetic order: ('a', 1)\n",
       "The last in alphabetic order: ('w', 1)\n"
      ]
@@ -923,7 +1028,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 28,
+   "execution_count": 15,
    "metadata": {},
    "outputs": [
     {
@@ -999,9 +1104,33 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 16,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Closest pair (d:0.0): (label:(0,10,10), last:(0,10,10))\n",
+      "alfa:(0,10,0) distance from origin:10.00\n",
+      "other:(4,9,10) distance from origin:14.04\n",
+      "label:(0,10,10) distance from origin:14.14\n",
+      "last:(0,10,10) distance from origin:14.14\n",
+      "zebra:(8,9,11) distance from origin:16.31\n",
+      "point:(10,20,10) distance from origin:24.49\n",
+      "fifth:(42,102,10) distance from origin:110.76\n",
+      "\n",
+      "Sort by label\n",
+      "alfa:(0,10,0) distance from origin:10.00\n",
+      "fifth:(42,102,10) distance from origin:110.76\n",
+      "label:(0,10,10) distance from origin:14.14\n",
+      "last:(0,10,10) distance from origin:14.14\n",
+      "other:(4,9,10) distance from origin:14.04\n",
+      "point:(10,20,10) distance from origin:24.49\n",
+      "zebra:(8,9,11) distance from origin:16.31\n"
+     ]
+    }
+   ],
    "source": [
     "#from previous edition of the class \n",
     "\n",
@@ -1105,9 +1234,49 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 17,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Unable to send message. Person not found\n",
+      "\n",
+      "Luca Bianco has 2 new message(s):\n",
+      " - from Alberto Montresor: I am fine, thanks. Yourself?\n",
+      " - from Alberto Montresor: All OK\n",
+      "\n",
+      "Alberto Montresor has 3 new message(s):\n",
+      " - from Luca Bianco: Hi Alberto, hope things are fine.\n",
+      " - from Luca Bianco: Great. Cheers. How about David?\n",
+      " - from David Leoni: Yep. Thanks\n",
+      "\n",
+      "David Leoni has 1 new message(s):\n",
+      " - from Alberto Montresor: You OK?\n",
+      "\n",
+      "\n",
+      "Alberto Montresor --> Luca Bianco: I am fine, thanks. Yourself?\n",
+      "Alberto Montresor --> Luca Bianco: All OK\n",
+      "\n",
+      "Luca Bianco does not have messages from David Leoni\n",
+      "\n",
+      "\n",
+      "Luca Bianco --> Alberto Montresor: Hi Alberto, hope things are fine.\n",
+      "Luca Bianco --> Alberto Montresor: Great. Cheers. How about David?\n",
+      "\n",
+      "\n",
+      "David Leoni --> Alberto Montresor: Yep. Thanks\n",
+      "\n",
+      "David Leoni does not have messages from Luca Bianco\n",
+      "\n",
+      "\n",
+      "Alberto Montresor --> David Leoni: You OK?\n",
+      "\n",
+      "Luca Bianco has 0 new message(s).\n"
+     ]
+    }
+   ],
    "source": [
     "\n",
     "class Person:\n",
@@ -1201,7 +1370,7 @@
  "metadata": {
   "celltoolbar": "Edit Metadata",
   "kernelspec": {
-   "display_name": "Python 3.8.5 ('base')",
+   "display_name": "base",
    "language": "python",
    "name": "python3"
   },
@@ -1215,12 +1384,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.8.15"
-  },
-  "vscode": {
-   "interpreter": {
-    "hash": "40c5a1e5e9beb9a52b32dc62c9941cbcbeb1c8fcbfea2c261c390e1a1bc44a33"
-   }
+   "version": "3.11.7"
   }
  },
  "nbformat": 4,

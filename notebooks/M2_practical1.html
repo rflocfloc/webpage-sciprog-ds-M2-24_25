@@ -174,7 +174,7 @@ as we will see, new data-types can be defined in Python.</p>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -227,7 +227,7 @@ as we will see, new data-types can be defined in Python.</p>
 <div class="highlight"><pre>
 &lt;class &#39;__main__.Rectangle&#39;&gt;
 &lt;class &#39;__main__.Rectangle&#39;&gt;
-R == R1? False id R:140461848354768 id R1:140461848353232
+R == R1? False id R:140436373140688 id R1:140436373142480
 
 R:
 Length: 5 Width: 10
@@ -262,7 +262,7 @@ are recommended.</p>
 <p>Private attributes and methods can be defined using the <code class="docutils literal notranslate"><span class="pre">__</span></code> notation (i.e. the name of the attribute or method is <strong>preceded</strong> by two underscores <code class="docutils literal notranslate"><span class="pre">__</span></code>).</p>
 <p><strong>Example</strong> Let’s see what happens to the rectangle class with encapsulation.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -305,12 +305,13 @@ are recommended.</p>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_59974/2984036234.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     20</span> d <span class="ansi-blue-fg">=</span> R<span class="ansi-blue-fg">.</span>diagonal<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     21</span> <span class="ansi-red-fg">#we might be tempted to access the encapsulated values:</span>
-<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg"> print(&#34;\nR:\nLength: {} Width: {}\nPerimeter: {}\nArea:{}&#34;.format(R.__length,
-</span><span class="ansi-green-intense-fg ansi-bold">     23</span>                                                                   R<span class="ansi-blue-fg">.</span>__width<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     24</span>                                                                   p<span class="ansi-blue-fg">,</span>
+Cell <span class="ansi-green-fg">In[3], line 22</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span> d <span style="color: rgb(98,98,98)">=</span> R<span style="color: rgb(98,98,98)">.</span>diagonal()
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(95,135,135)">#we might be tempted to access the encapsulated values:</span>
+<span class="ansi-green-fg">---&gt; 22</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">&#34;</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">R:</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Length: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{}</span><span style="color: rgb(175,0,0)"> Width: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{}</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Perimeter: </span><span class="ansi-bold" style="color: rgb(175,95,135)">{}</span><span class="ansi-bold" style="color: rgb(175,95,0)">\n</span><span style="color: rgb(175,0,0)">Area:</span><span class="ansi-bold" style="color: rgb(175,95,135)">{}</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(98,98,98)">.</span>format(R<span style="color: rgb(98,98,98)">.</span>__length,
+<span class="ansi-green-intense-fg ansi-bold">     23</span>                                                                   R<span style="color: rgb(98,98,98)">.</span>__width,
+<span class="ansi-green-intense-fg ansi-bold">     24</span>                                                                   p,
+<span class="ansi-green-intense-fg ansi-bold">     25</span>                                                                   a))
 
 <span class="ansi-red-fg">AttributeError</span>: &#39;Rectangle&#39; object has no attribute &#39;__length&#39;
 </pre></div></div>
@@ -319,7 +320,7 @@ are recommended.</p>
 <p>To work around this, we can define a specific interface to access the values (these are normally called <strong>getter</strong> methods as they get and return the value).</p>
 <p><strong>Example</strong> Let’s see what happens to the rectangle class with encapsulation and getter methods.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -370,7 +371,7 @@ Area:60
 <p><strong>Setter</strong> methods can be used to change the values of attributes <strong>after initialization</strong>.</p>
 <p><strong>Example:</strong> Let’s define a Person class with the following attributes: name, surname, telephone number and address. All attributes are private. The address and phone numbers might change, so we need a method to change them.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
@@ -438,8 +439,8 @@ New address: via Sommarive, Povo, Trento
 <p>More information on these special methods can be found <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html?#special-method-names">here</a>.</p>
 <p><strong>Example</strong> A decimal number <span class="math notranslate nohighlight">\(T\)</span> can be expressed in base <span class="math notranslate nohighlight">\(X\)</span> (for simplicity we will consider <span class="math notranslate nohighlight">\(X \in [1,9]\)</span>) as: <span class="math notranslate nohighlight">\(T = aX^{N} + bX^{N-1}+...+ (n+1) X^{0}\)</span>. Such a number can be represented as two elements: <span class="math notranslate nohighlight">\((X, (a,b,...,n+1))\)</span> (the base and the tuple of all the values). Let’s define a class MyNumber that can represent numbers in any base (from 1 to 9). The class has two attributes, the <code class="docutils literal notranslate"><span class="pre">base</span></code> (which is a number representing the base) and the <code class="docutils literal notranslate"><span class="pre">values</span></code> a tuple of
 numbers. Let’s redefine some operators (i.e. <strong>add</strong>, <strong>lt</strong>, <strong>str</strong>) and implement some methods to covert these numbers into decimals.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyNumber</span><span class="p">:</span>
@@ -498,6 +499,31 @@ numbers. Let’s redefine some operators (i.e. <strong>add</strong>, <strong>lt<
 <br/></pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Base: 10
+Values:(1, 2, 3)
+123 = 1*100 + 2*10 + 3*1
+
+Base: 4
+Values:(1, 2, 3)
+27 = 1*16 + 2*4 + 3*1
+
+mn+mn2:150
+
+
+Error.Values must be lower than base
+Can&#39;t create n. with base 3 and values (7, 1, 1)
+
+
+123 &lt; 27? False
+123 == 27? False
+123 &gt; 27? True
+</pre></div></div>
+</div>
 </section>
 <section id="Inheritance-and-overriding">
 <h2>Inheritance and overriding<a class="headerlink" href="#Inheritance-and-overriding" title="Link to this heading"></a></h2>
@@ -516,8 +542,8 @@ class MySubClass(MySuperClass):
 </div>
 <p>basically, we just specify the superclass after the name of the subclass we are defining.</p>
 <p>Consider the following example:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
@@ -565,9 +591,22 @@ class MySubClass(MySuperClass):
 <br/></pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Jade Smith is aged 5
+Dan Smith is aged 45
+ - Dan&#39;s child is Jade Smith
+ - Dan&#39;s child is John Smith
+ - Dan&#39;s child is Tim Smith
+
+</pre></div></div>
+</div>
 <p>Note that the object <code class="docutils literal notranslate"><span class="pre">Dad</span></code> (subclass) is-a <code class="docutils literal notranslate"><span class="pre">Person</span></code> (superclass) but has a further attribute that is the list of children, each of which are of type <code class="docutils literal notranslate"><span class="pre">Person</span></code>. The <code class="docutils literal notranslate"><span class="pre">getInfo</span></code> method of the subclass <code class="docutils literal notranslate"><span class="pre">Dad</span></code> overrides the corresponding method of the superclass <code class="docutils literal notranslate"><span class="pre">Person</span></code> and prints some information on the children.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
@@ -620,6 +659,19 @@ class MySubClass(MySuperClass):
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Jade Smith is aged 5
+Dan Smith is aged 45
+ - Dan&#39;s child is Jade Smith
+ - Dan&#39;s child is John Smith
+ - Dan&#39;s child is Tim Smith
+
+</pre></div></div>
+</div>
 <section id="Exercise">
 <h3>Exercise<a class="headerlink" href="#Exercise" title="Link to this heading"></a></h3>
 <p>Implement a superclass <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> with two attributes:</p>
@@ -630,7 +682,7 @@ class MySubClass(MySuperClass):
 <p>Add a method to return the perimeter and a method to return the number of edges of the polygon. Implement a <code class="docutils literal notranslate"><span class="pre">__str__</span></code> method to print an object of the class with its shape. Then create two subclasses of poylgon: Rectangle and Triangle. For each subclass modify the initializer accordingly and also override the <code class="docutils literal notranslate"><span class="pre">__str__</span></code> to print the object id.</p>
 <details><summary><p>Show/Hide solution</p>
 </summary><div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Polygon</span><span class="p">:</span>
@@ -695,10 +747,10 @@ class MySubClass(MySuperClass):
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 I am a polygon
-I am a rectangle with id: 140461848406096.
+I am a rectangle with id: 140436237036112.
 4
 8
-I am a triangle with id: 140461848405376.
+I am a triangle with id: 140436237125072.
 3
 12
 </pre></div></div>
@@ -720,8 +772,8 @@ I am a triangle with id: 140461848405376.
 </div>
 <p>Let’s see some examples of map and filter.</p>
 <p><strong>Example:</strong> Let’s define two functions to convert temperatures from fahrenheit to celsius and vice-versa. Let’s finally use them to work out the temperatures that are above and below freezing.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fahrenheit</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
@@ -752,6 +804,28 @@ I am a triangle with id: 140461848405376.
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;class &#39;map&#39;&gt;
+27.50°F --&gt; -2.50°C
+29.00°F --&gt; -1.67°C
+37.50°F --&gt; 3.06°C
+12.00°F --&gt; -11.11°C
+44.00°F --&gt; 6.67°C
+72.00°F --&gt; 22.22°C
+100.00°F --&gt; 37.78°C
+
+
+Freezing temperatures:
+&lt;class &#39;filter&#39;&gt;
+27.50°F --&gt; -2.50°C
+29.00°F --&gt; -1.67°C
+12.00°F --&gt; -11.11°C
+</pre></div></div>
+</div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">map</span></code> and <code class="docutils literal notranslate"><span class="pre">filter</span></code> respectively return an object <code class="docutils literal notranslate"><span class="pre">map</span></code> and an object <code class="docutils literal notranslate"><span class="pre">filter</span></code> which we need to convert into lists or tuples if we want to work with the results.</p>
 <p><strong>Examples</strong></p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">reduce</span></code> to:</p>
@@ -759,8 +833,8 @@ I am a triangle with id: 140461848405376.
 <li><p>sum the elements of a list</p></li>
 <li><p>count how many <strong>non-space</strong> characters a string has</p></li>
 </ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
@@ -772,8 +846,16 @@ I am a triangle with id: 140461848405376.
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+22
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
@@ -788,6 +870,15 @@ I am a triangle with id: 140461848405376.
 <br/></pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Word sizes: [7, 5, 3, 9, 3, 3, 7, 2, 4]
+Dijkstra&#39;s quote has 43 characters
+</pre></div></div>
+</div>
 <p>All the above examples required the specification of a function. We do not necessarily need to specify a function name in Python thanks to the <strong>anonimous functions</strong> also known as <strong>lambda functions</strong>.</p>
 <p>Their basic syntax is:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>lambda input-parameters: expression
@@ -798,8 +889,8 @@ I am a triangle with id: 140461848405376.
 </pre></div>
 </div>
 <p>Some examples of lambda functions follow:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sum_lambda</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
@@ -818,10 +909,27 @@ I am a triangle with id: 140461848405376.
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+30
+Hi there!
+
+
+200
+Hi! Hi! Hi!
+
+
+Hi there from luca!
+Hi There From Luca!
+</pre></div></div>
+</div>
 <p>More interesting uses of lambda involve sorting of tuples through the <code class="docutils literal notranslate"><span class="pre">key</span></code> parameter:</p>
 <p><strong>Example:</strong> Let’s count how many occurrences we have for each non-space character in the string “Testing shows the presence, not the absence of bugs”. And print the least and most frequent character, as well as the first and last in alphabetic order.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myText</span> <span class="o">=</span> <span class="s2">&quot;testing shows the presence, not the absence of bugs&quot;</span>
@@ -856,10 +964,8 @@ I am a triangle with id: 140461848405376.
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [(&#39;t&#39;, 5), (&#39;e&#39;, 8), (&#39;s&#39;, 6), (&#39;i&#39;, 1), (&#39;n&#39;, 4), (&#39;g&#39;, 2), (&#39;h&#39;, 3), (&#39;o&#39;, 3), (&#39;w&#39;, 1), (&#39;p&#39;, 1), (&#39;r&#39;, 1), (&#39;c&#39;, 2), (&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;f&#39;, 1), (&#39;u&#39;, 1)]
-[(&#39;i&#39;, 1), (&#39;w&#39;, 1), (&#39;p&#39;, 1), (&#39;r&#39;, 1), (&#39;a&#39;, 1), (&#39;f&#39;, 1), (&#39;u&#39;, 1), (&#39;g&#39;, 2), (&#39;c&#39;, 2), (&#39;b&#39;, 2), (&#39;h&#39;, 3), (&#39;o&#39;, 3), (&#39;n&#39;, 4), (&#39;t&#39;, 5), (&#39;s&#39;, 6), (&#39;e&#39;, 8)]
 All least frequent: [(&#39;i&#39;, 1), (&#39;w&#39;, 1), (&#39;p&#39;, 1), (&#39;r&#39;, 1), (&#39;a&#39;, 1), (&#39;f&#39;, 1), (&#39;u&#39;, 1)]
 All most frequent: [(&#39;e&#39;, 8)]
-[(&#39;a&#39;, 1), (&#39;b&#39;, 2), (&#39;c&#39;, 2), (&#39;e&#39;, 8), (&#39;f&#39;, 1), (&#39;g&#39;, 2), (&#39;h&#39;, 3), (&#39;i&#39;, 1), (&#39;n&#39;, 4), (&#39;o&#39;, 3), (&#39;p&#39;, 1), (&#39;r&#39;, 1), (&#39;s&#39;, 6), (&#39;t&#39;, 5), (&#39;u&#39;, 1), (&#39;w&#39;, 1)]
 The first in alphabetic order: (&#39;a&#39;, 1)
 The last in alphabetic order: (&#39;w&#39;, 1)
 </pre></div></div>
@@ -879,7 +985,7 @@ The last in alphabetic order: (&#39;w&#39;, 1)
 </ol>
 <details><summary><p>Show/Hide solution</p>
 </summary><div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Consumer</span><span class="p">:</span>
@@ -944,8 +1050,8 @@ p6 = Point3D(42,102,10, &quot;fifth&quot;)
 <li><p>Sort the points alphabetically by label (and print them).</p></li>
 </ol>
 <details><summary><p>Show/Hide solution</p>
-</summary><div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</summary><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#from previous edition of the class</span>
@@ -1005,6 +1111,30 @@ p6 = Point3D(42,102,10, &quot;fifth&quot;)
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Closest pair (d:0.0): (label:(0,10,10), last:(0,10,10))
+alfa:(0,10,0) distance from origin:10.00
+other:(4,9,10) distance from origin:14.04
+label:(0,10,10) distance from origin:14.14
+last:(0,10,10) distance from origin:14.14
+zebra:(8,9,11) distance from origin:16.31
+point:(10,20,10) distance from origin:24.49
+fifth:(42,102,10) distance from origin:110.76
+
+Sort by label
+alfa:(0,10,0) distance from origin:10.00
+fifth:(42,102,10) distance from origin:110.76
+label:(0,10,10) distance from origin:14.14
+last:(0,10,10) distance from origin:14.14
+other:(4,9,10) distance from origin:14.04
+point:(10,20,10) distance from origin:24.49
+zebra:(8,9,11) distance from origin:16.31
+</pre></div></div>
+</div>
 </details><ol class="arabic simple" start="3">
 <li><p>Write a Person class with the following attributes: name, surname and mailbox. A mailbox is a list that contains string messages sent to the person. Each message entry should be a tuple <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">surname,</span> <span class="pre">message)</span></code> where <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">surname</span></code> are the name and surname of the sender of the message, while <code class="docutils literal notranslate"><span class="pre">message</span></code> is a string with the text of the message. Implement the following methods:</p>
 <ol class="loweralpha simple">
@@ -1035,8 +1165,8 @@ luca.sendMessage(stranger, &quot;Who are you?&quot;)
 </div>
 <p>and check the mailbox of all the Persons in <code class="docutils literal notranslate"><span class="pre">[luca,alberto,david]</span></code>.</p>
 <details><summary><p>Show/Hide solution</p>
-</summary><div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</summary><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
@@ -1119,6 +1249,46 @@ luca.sendMessage(stranger, &quot;Who are you?&quot;)
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{}</span><span class="s2"> has </span><span class="si">{}</span><span class="s2"> new message(s).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">luca</span><span class="p">,</span><span class="n">luca</span><span class="o">.</span><span class="n">checkMailbox</span><span class="p">()))</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Unable to send message. Person not found
+
+Luca Bianco has 2 new message(s):
+ - from Alberto Montresor: I am fine, thanks. Yourself?
+ - from Alberto Montresor: All OK
+
+Alberto Montresor has 3 new message(s):
+ - from Luca Bianco: Hi Alberto, hope things are fine.
+ - from Luca Bianco: Great. Cheers. How about David?
+ - from David Leoni: Yep. Thanks
+
+David Leoni has 1 new message(s):
+ - from Alberto Montresor: You OK?
+
+
+Alberto Montresor --&gt; Luca Bianco: I am fine, thanks. Yourself?
+Alberto Montresor --&gt; Luca Bianco: All OK
+
+Luca Bianco does not have messages from David Leoni
+
+
+Luca Bianco --&gt; Alberto Montresor: Hi Alberto, hope things are fine.
+Luca Bianco --&gt; Alberto Montresor: Great. Cheers. How about David?
+
+
+David Leoni --&gt; Alberto Montresor: Yep. Thanks
+
+David Leoni does not have messages from Luca Bianco
+
+
+Alberto Montresor --&gt; David Leoni: You OK?
+
+Luca Bianco has 0 new message(s).
+</pre></div></div>
 </div>
 </details></section>
 </section>
