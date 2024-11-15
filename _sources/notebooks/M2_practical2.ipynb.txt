@@ -523,7 +523,11 @@
     "However, measuring the memory footprint of a whole function (rather than single objects), would be much more useful.  \n",
     "We can achieve that, for instance, with the ```memory-profiler``` package.\n",
     "\n",
-    "You can install it with pip: ```pip install -U memory_profiler```"
+    "You can install it with pip: ```pip install -U memory_profiler```, if you're on a PC wihtout root privileges, you should add the `--user` option to the command line:\n",
+    "\n",
+    "```\n",
+    "pip install -U --user memory_profiler\n",
+    "```"
    ]
   },
   {
