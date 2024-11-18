@@ -16,3 +16,5 @@ Email: riccardo.scandino@unitn.it
         Home <notebooks/index.ipynb>
         Practical 1 <notebooks/M2_practical1.ipynb>
         Practical 2 <notebooks/M2_practical2.ipynb>
+        Practical 3 <notebooks/M2_practical3.ipynb>
+        Practical 4 <notebooks/M2_practical4.ipynb>
