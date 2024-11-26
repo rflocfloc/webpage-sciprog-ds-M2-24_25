@@ -1924,7 +1924,7 @@
     "\n",
     "5. Implement a much faster queue by using the ```collections.dequeue``` collection.\n",
     "\n",
-    "<details><summary>Show/Hide Solution</details>\n"
+    "<details><summary>Show/Hide Solution</summary>\n"
    ]
   },
   {
