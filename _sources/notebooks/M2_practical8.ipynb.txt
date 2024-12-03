@@ -1392,7 +1392,7 @@
     "    print(G.hasPath(\"Node_alone2\", \"Node_alone\"))\n",
     "```\n",
     "\n",
-    "<details><summary>Show/Hide Solution</details>\n"
+    "<details><summary>Show/Hide Solution</summary>\n"
    ]
   },
   {
