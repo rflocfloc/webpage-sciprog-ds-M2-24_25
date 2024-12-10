@@ -23,3 +23,4 @@ Email: riccardo.scandino@unitn.it
         Practical 7 <notebooks/M2_practical7.ipynb>
         Practical 8 <notebooks/M2_practical8.ipynb>
         Practical 9 <notebooks/M2_practical9.ipynb>
+        Practical 10 <notebooks/M2_practical10.ipynb>
